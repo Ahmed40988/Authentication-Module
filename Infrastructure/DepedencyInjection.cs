@@ -1,0 +1,45 @@
+﻿using Infrastructure.Persistence;
+
+namespace Infrastructure
+{
+    public class DepedencyInjection
+    {
+        public static IServiceCollection AddInfrastructureDependencies(this IServiceCollection services, IConfiguration configuration)
+        {
+            return services
+                .AddPersistence()
+                .AddDatabaseConfig(configuration);
+ 
+        }
+
+    
+
+            public static IServiceCollection AddPersistence(this IServiceCollection services)
+        {
+            services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
+            //services.AddScoped<ITokenService, TokenService>();
+      
+            return services;
+        }
+        private static IServiceCollection AddDatabaseConfig(this IServiceCollection services, IConfiguration configuration)
+        {
+            var connectionString = configuration.GetConnectionString("constr") ??
+                throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString));
+
+            return services;
+        }
+
+       // private static IServiceCollection AddIdentityConfig(this IServiceCollection services)
+       // {
+       //     services.AddIdentityCore<AppUser>()
+       //.AddRoles<IdentityRole>()
+       //.AddEntityFrameworkStores<ApplicationDbContext>()
+       //.AddDefaultTokenProviders();
+
+       //     return services;
+       // }
+    }
+}
