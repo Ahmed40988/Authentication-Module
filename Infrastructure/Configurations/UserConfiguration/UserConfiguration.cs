@@ -8,17 +8,11 @@ namespace Infrastructure.Configurations.UserConfiguration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.Property(x => x.FullName).HasMaxLength(50).IsRequired();
+            builder.Property(x => x.FullName)
+                .HasMaxLength(50)
+                .IsRequired();
 
-            builder.HasMany(x => x.UserPhones)
-                .WithOne(x => x.User)
-                .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(x => x.UserAddresses)
-                .WithOne(x => x.User)
-                .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
