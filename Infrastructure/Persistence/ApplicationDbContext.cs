@@ -1,4 +1,5 @@
-﻿using Domain.Entities.AuthModule;
+﻿using Application.Interfaces;
+using Domain.Entities.AuthModule;
 using Domain.Entities.AuthModules;
 using Domain.Entities.RoleModule;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -7,12 +8,15 @@ using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Persistence
 {
-    public class ApplicationDbContext : IdentityDbContext<User>
+    public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbContext
     {
 
         public DbSet<RolePermission> Roles { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+
+        public DbSet<User> ApplicationUsers { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
