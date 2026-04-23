@@ -1,21 +1,24 @@
-﻿//namespace Application.Interfaces.Auth
-//{
-//    public interface ITokenService
-//    {
-//        Task<TokenResult> GenerateJwtToken(ApplicationUser user);
+﻿using Domain.Entities.AuthModule;
+using Domain.Entities.AuthModules;
 
-//        Task<RefreshToken> GenerateRefreshToken(ApplicationUser user);
+namespace Application.Interfaces.Auth
+{
+    public interface ITokenService
+    {
+        Task<TokenResult> GenerateJwtToken(User user);
 
-//        Task<RefreshToken?> GetRefreshTokenAsync(string token);
-//        Task RevokeRefreshTokenAsync(string token);
-//    }
+        Task<RefreshToken> GenerateRefreshToken(User user);
 
-//    public class TokenResult
-//    {
-//        public string Token { get; set; } = string.Empty;
+        Task<RefreshToken?> GetRefreshTokenAsync(string token);
+        Task RevokeRefreshTokenAsync(string token);
+    }
 
-//        public string RefreshToken { get; set; } = string.Empty;
+    public class TokenResult
+    {
+        public string Token { get; set; } = string.Empty;
 
-//        public DateTime ExpiresAt { get; set; }
-//    }
-//}
+        public string RefreshToken { get; set; } = string.Empty;
+
+        public DateTime ExpiresAt { get; set; }
+    }
+}
