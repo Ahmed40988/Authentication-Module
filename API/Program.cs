@@ -1,23 +1,52 @@
-using System.Reflection;
+using Api;
+using API.Extensions;
+using Application;
+using Application.Common.Abstractions;
 using Application.Interfaces;
 using Domain.Entities.AuthModules;
+using Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc;
+using System.Globalization;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.InvalidModelStateResponseFactory = context =>
+    {
+        var message = context.ModelState.GetFirstErrorMessage();
+        var body = Result<object>.Failure(message, 400);
+        return new BadRequestObjectResult(body);
+    };
+});
 // Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())
-);
+builder.Services.AddAPIDependencies(builder.Configuration);
+builder.Services.AddApplicationDependencies();
+builder.Services.AddInfrastructureDependencies(builder.Configuration);
+builder.Services.AddDataProtection();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddMemoryCache();
 
 var app = builder.Build();
+// Localization configuration
+var supportedCultures = new[] { "en", "ar" };
 
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("en"),
+    SupportedCultures = supportedCultures.Select(c => new CultureInfo(c)).ToList(),
+    SupportedUICultures = supportedCultures.Select(c => new CultureInfo(c)).ToList(),
+    RequestCultureProviders = new[]
+    {
+        new AcceptLanguageHeaderRequestCultureProvider()
+    }
+
+});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
