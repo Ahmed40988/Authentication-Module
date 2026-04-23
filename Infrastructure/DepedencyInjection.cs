@@ -1,26 +1,28 @@
 ﻿using Infrastructure.Persistence;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure
 {
-    public class DepedencyInjection
+    public static class DepedencyInjection
     {
         public static IServiceCollection AddInfrastructureDependencies(this IServiceCollection services, IConfiguration configuration)
         {
             return services
-                .AddPersistence()
                 .AddDatabaseConfig(configuration);
  
         }
 
     
 
-            public static IServiceCollection AddPersistence(this IServiceCollection services)
-        {
-            services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
-            //services.AddScoped<ITokenService, TokenService>();
+        //    public static IServiceCollection AddPersistence(this IServiceCollection services)
+        //{
+        //    services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
+        //    //services.AddScoped<ITokenService, TokenService>();
       
-            return services;
-        }
+        //    return services;
+        //}
         private static IServiceCollection AddDatabaseConfig(this IServiceCollection services, IConfiguration configuration)
         {
             var connectionString = configuration.GetConnectionString("constr") ??

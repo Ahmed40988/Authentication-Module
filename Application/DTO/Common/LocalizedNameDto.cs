@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace Application.DTO.Common;
 public sealed class LocalizedNameDto
 {

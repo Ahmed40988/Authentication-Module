@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace Application.Common.Abstractions
 {
     public class PaginatedList<T>(List<T> items, int pageNumber, int count, int pageSize)

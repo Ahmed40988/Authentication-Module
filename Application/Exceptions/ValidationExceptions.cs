@@ -1,4 +1,6 @@
-﻿namespace Application.Exceptions
+﻿using FluentValidation.Results;
+
+namespace Application.Exceptions
 {
     public class ValidationExceptions : Exception
     {

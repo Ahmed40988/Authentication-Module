@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+
 namespace API.Extensions;
 
 public static class ModelStateExtensions
