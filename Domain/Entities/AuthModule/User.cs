@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Domain.Entities.RoleModule;
+using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities.AuthModules
 {
@@ -8,7 +9,7 @@ namespace Domain.Entities.AuthModules
 
         public ICollection<UserPhone> UserPhones { get; set; } = new HashSet<UserPhone>();
         public ICollection<UserAddress> UserAddresses { get; set; } = new HashSet<UserAddress>();
-
+        public ICollection<RolePermission> Roles { get; set; } = new HashSet<RolePermission>();
 
     }
 }
