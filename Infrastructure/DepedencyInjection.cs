@@ -2,6 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Domain.Entities.AuthModules;
+using Microsoft.AspNetCore.Identity;
 
 namespace Infrastructure
 {
@@ -34,14 +36,14 @@ namespace Infrastructure
             return services;
         }
 
-       // private static IServiceCollection AddIdentityConfig(this IServiceCollection services)
-       // {
-       //     services.AddIdentityCore<AppUser>()
-       //.AddRoles<IdentityRole>()
-       //.AddEntityFrameworkStores<ApplicationDbContext>()
-       //.AddDefaultTokenProviders();
+        public static IServiceCollection AddIdentityConfig(this IServiceCollection services)
+        {
 
-       //     return services;
-       // }
+            services.AddIdentityCore<User>()
+               .AddRoles<IdentityRole>()
+               .AddEntityFrameworkStores<ApplicationDbContext>()
+               .AddDefaultTokenProviders();
+            return services;
+        }
     }
 }

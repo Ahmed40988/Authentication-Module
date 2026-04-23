@@ -8,7 +8,6 @@ namespace Infrastructure.Configurations.UserConfiguration
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.HasKey(X => X.ID);
             builder.Property(x => x.FullName).HasMaxLength(50).IsRequired();
 
             builder.HasMany(x => x.UserPhones)
