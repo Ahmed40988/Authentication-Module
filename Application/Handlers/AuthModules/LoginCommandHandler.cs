@@ -78,9 +78,6 @@ namespace Application.Handlers.AuthModules
                 FullName = user.FullName,
                 Email = user.Email,
 
-                PhoneNumbers = user.UserPhones
-                    .Select(p => p.PhoneNumber)
-                    .ToList()
             };
 
             return Result<LoginResponseDTO>.Success(

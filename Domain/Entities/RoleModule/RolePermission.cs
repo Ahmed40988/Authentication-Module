@@ -12,7 +12,8 @@ namespace Domain.Entities.RoleModule
     {
         [Key]
         public Guid RolePermission_Id { get; set; }
-        public string Role_Id { get; set; } 
+        
+        public string RoleName { get; set; } 
         public Guid Permission_Id { get; set; }
 
         public IdentityRole Role { get; set; }

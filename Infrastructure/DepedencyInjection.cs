@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities.AuthModules;
 using Microsoft.AspNetCore.Identity;
+using Application.Interfaces.Auth;
+using Infrastructure.Services.AuthModules;
 
 namespace Infrastructure
 {
@@ -16,18 +18,12 @@ namespace Infrastructure
  
         }
 
-    
 
-        //    public static IServiceCollection AddPersistence(this IServiceCollection services)
-        //{
-        //    services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
-        //    //services.AddScoped<ITokenService, TokenService>();
+
       
-        //    return services;
-        //}
-        private static IServiceCollection AddDatabaseConfig(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddDatabaseConfig(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionString = configuration.GetConnectionString("constr") ??
+            var connectionString = configuration.GetSection("constr").Value ??
                 throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
             services.AddDbContext<ApplicationDbContext>(options =>
