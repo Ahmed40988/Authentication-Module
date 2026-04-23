@@ -1,0 +1,72 @@
+﻿using Application.Interfaces;
+using Domain.Entities.AuthModules;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using MimeKit;
+
+namespace  Infrastructure.Services.Email;
+
+public class EmailService(IOptions<MailSettings> mailSettings, ILogger<EmailService> logger) : IEmailSender, IEmailService
+{
+    private readonly MailSettings _mailSettings = mailSettings.Value;
+    private readonly ILogger<EmailService> _logger = logger;
+
+    public async Task SendEmailAsync(string email, string subject, string htmlMessage)
+    {
+        var message = new MimeMessage
+        {
+            Sender = MailboxAddress.Parse(_mailSettings.Mail),
+            Subject = subject
+        };
+
+        message.To.Add(MailboxAddress.Parse(email));
+
+        var builder = new BodyBuilder
+        {
+            HtmlBody = htmlMessage
+        };
+
+        message.Body = builder.ToMessageBody();
+
+        using var smtp = new SmtpClient();
+
+        _logger.LogInformation("Sending email to {email}", email);
+
+        smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
+        smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+        await smtp.SendAsync(message);
+        smtp.Disconnect(true);
+    }
+
+    public async Task SendResetPasswordEmail(User user, string OTP)
+    {
+
+        var emailBody = EmailBodyBuilder.GenerateEmailBody("ForgetPassword", templateModel: new Dictionary<string, string>
+                {
+                    { "{{name}}", user.FullName },
+                    { "{{OTP}}", $"{OTP}" }
+                }
+        );
+
+        await SendEmailAsync(user.Email!, "✅ Authentication Module: Change Password", emailBody);
+
+        await Task.CompletedTask;
+    }
+
+    public async Task SendConfirmationEmail(User user, string OTP)
+    {
+
+        var emailBody = EmailBodyBuilder.GenerateEmailBody("EmailConfirmation", templateModel: new Dictionary<string, string>
+                {
+                { "{{name}}", user.FullName },
+                { "{{OTP}}", $"{OTP}" }
+                }
+        );
+        await SendEmailAsync(user.Email!, "✅  Authentication Module: Email Confirmation", emailBody);
+
+        await Task.CompletedTask;
+    }
+}
