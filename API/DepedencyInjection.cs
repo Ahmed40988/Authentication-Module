@@ -1,9 +1,10 @@
 ﻿using Microsoft.OpenApi;
+using Microsoft.OpenApi.Models;
 
 namespace Api
 
 {
-    public class DepedencyInjection
+    public static class DepedencyInjection
     {
 
         public static IServiceCollection AddAPIDependencies(this IServiceCollection services, IConfiguration configuration)

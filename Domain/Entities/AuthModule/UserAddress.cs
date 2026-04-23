@@ -1,4 +1,4 @@
-﻿namespace Awael_Al_Joudah.Domain.Entities.AuthModules;
+﻿namespace Domain.Entities.AuthModules;
 
 public class UserAddress 
 {

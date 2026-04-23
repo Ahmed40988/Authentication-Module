@@ -1,4 +1,12 @@
-﻿namespace WebApplication1.Infrastructure.Localizer
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Localization;
+using System.Collections.Concurrent;
+using System.Globalization;
+using System.Text;
+using System.Text.Json;
+
+namespace WebApplication1.Infrastructure.Localizer
 {
     public class JsonStringLocalizer : IStringLocalizer
     {

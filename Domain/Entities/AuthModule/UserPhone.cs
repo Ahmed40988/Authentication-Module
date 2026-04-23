@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Awael_Al_Joudah.Domain.Entities.AuthModules;
+﻿namespace Domain.Entities.AuthModules;
 
 public class UserPhone
 {

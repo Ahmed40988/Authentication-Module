@@ -1,3 +1,8 @@
+using Application.Common.Abstractions;
+using Application.Exceptions;
+using System.Net;
+using System.Text.Json;
+
 namespace API.Middlewares;
 
 public class ExceptionHandlingMiddleware(RequestDelegate next, ILogger<ExceptionHandlingMiddleware> logger)
