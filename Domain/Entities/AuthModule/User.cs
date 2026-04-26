@@ -1,11 +1,18 @@
-﻿using Domain.Entities.RoleModule;
+﻿using Domain.Entities.Base;
+using Domain.Entities.RoleModule;
 using Microsoft.AspNetCore.Identity;
 
 namespace Domain.Entities.AuthModules
 {
-    public class User : IdentityUser
+    public class User : IdentityUser,IAuditableEntity
     {
         public string FullName { get; set; }= string.Empty;
         public ICollection<RolePermission> Roles { get; set; } = new HashSet<RolePermission>();
+
+        public DateTime CreatedAt { get; set; }
+        public string? CreatedById { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public string? UpdatedById { get; set; }
+
     }
 }

@@ -10,7 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using ServiceStack.Auth;
-using WebApplication1.Infrastructure.Localizer;
+using Infrastructure.Localizer;
+using Infrastructure.Services.Hasher;
 
 namespace Infrastructure
 {
@@ -46,9 +47,9 @@ namespace Infrastructure
            // services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IEmailService , EmailService>();
-
             services.AddScoped<IApplicationDbContext>(provider =>
-    provider.GetRequiredService<ApplicationDbContext>());
+                 provider.GetRequiredService<ApplicationDbContext>());
+            services.AddScoped<IHasherService, HasherService>();
 
             return services;
         }
@@ -72,5 +73,6 @@ namespace Infrastructure
                .AddDefaultTokenProviders();
             return services;
         }
-    }
+
+           }
 }

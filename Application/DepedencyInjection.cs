@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
+﻿using Application.Validators.AuthModules;
+using Microsoft.Extensions.DependencyInjection;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 namespace Application
 {
     public static class DepedencyInjection
@@ -10,6 +12,9 @@ namespace Application
             {
                 options.RegisterServicesFromAssemblyContaining(typeof(DepedencyInjection));
             });
+
+            services.AddFluentValidationAutoValidation();
+            services.AddValidatorsFromAssembly(typeof(RegisterUserCommandValidator).Assembly);
 
             return services;
         }

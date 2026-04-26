@@ -2,6 +2,7 @@
 using Application.Common.Abstractions;
 using Application.DTO.User;
 using Application.Interfaces;
+using Application.Interfaces.Auth;
 using Domain.Entities.AuthModules;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -22,6 +23,7 @@ namespace Application.Handlers
         ,IStringLocalizer localizer
           , IMemoryCache memoryCache
         , IEmailService emailService
+            , IHasherService hasher
          ) : IRequestHandler<RegisterUserCommand, Result<UserResponseDto>>
     {
         private readonly UserManager<User> _userManager = userManager;
@@ -29,6 +31,7 @@ namespace Application.Handlers
         private readonly IStringLocalizer _localizer = localizer;
         private readonly IMemoryCache _memoryCache = memoryCache;
         private readonly IEmailService _emailService = emailService;
+        private readonly IHasherService _hasher = hasher;
 
         public async Task<Result<UserResponseDto>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
@@ -57,7 +60,8 @@ namespace Application.Handlers
                 //    return Result<UserResponseDto>.Failure(_localizer["Userregistrationfailed"] + ": " + error, 400);
                 //}
                 var otp = new Random().Next(100000, 999999).ToString();
-                _memoryCache.Set($"EmailOTP_{request.Email}", otp, TimeSpan.FromMinutes(5));
+                var hashedOtp = _hasher.Hash(otp);
+                _memoryCache.Set($"EmailOTP_{request.Email}", hashedOtp, TimeSpan.FromMinutes(5));
                 await _emailService.SendConfirmationEmail(user, otp);
 
                 var userResponse = new UserResponseDto(user.Id, user.FullName, user.Email, user.EmailConfirmed);

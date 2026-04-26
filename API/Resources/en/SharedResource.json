@@ -1,6 +1,25 @@
 {
-  "Unauthorized": "You are not authorized to perform this action, please login first."
-
-
-
+  "Unauthorized": "You are not authorized to perform this action, please login first.",
+  "Userregisteredsuccessfully": "User registered successfully.",
+  "Userregistrationfailed": "User registration failed.",
+  "Useralreadyexists": "Emails already exists.",
+  "PasswordsNotMatch": "Passwords do not match.",
+  "ConfirmPasswordRequired": "Confirm password is required.",
+  "WeakPassword": "Password is too weak.",
+  "PasswordRequired": "Password is required.",
+  "InvalidPhone": "Invalid phone number.",
+  "InvalidEmail": "Invalid email address.",
+  "EmailRequired": "Email is required.",
+  "FullNameRequired": "Full name is required.",
+  "OTPMustBe6Digits": "OTP must be 6 digits.",
+  "OTPRequired": "OTP is required.",
+  "OtpExpired": "OTP has expired.",
+  "InvalidOTP": "Invalid OTP.",
+  "UserNotFound": "User not found.",
+  "InvalidCredentials": "Invalid credentials.",
+  "AccountLocked": "Account is temporarily locked due to multiple failed login attempts. Please try again after a short period.",
+  "Emailconfirmationfailed": "Email confirmation failed. The confirmation code is invalid or has expired.",
+  "Emailconfirmed": "Email confirmed successfully. You can now log in to your account.",
+  "Passwordresetfailed": "Password reset failed. The reset code is invalid or has expired.",
+  "EmailAlreadyConfirmed" : "Email is already confirmed.",
 }
