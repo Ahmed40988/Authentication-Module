@@ -1,5 +1,6 @@
 using Api;
 using API.Extensions;
+using API.Middlewares;
 using Application;
 using Application.Common.Abstractions;
 using Application.Interfaces;
@@ -47,6 +48,10 @@ app.UseRequestLocalization(new RequestLocalizationOptions
     }
 
 });
+
+app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

@@ -81,7 +81,7 @@ namespace Infrastructure.Services.AuthModules
             var refreshToken = new RefreshToken
             {
                 Token = Convert.ToHexString(RandomNumberGenerator.GetBytes(32)),
-                CreatedOn = DateTime.Now,
+                CreatedAt = DateTime.Now,
                 ExpiresOn = DateTime.Now.AddDays(expiryDays),
                 UserId = user.Id
             };

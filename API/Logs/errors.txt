@@ -1,0 +1,8 @@
+2026-04-26 17:49:31 | SwaggerGeneratorException | Conflicting method/path combination "POST api/Auth/Login" for actions - API.Controllers.AuthController.Login (API), API.Controllers.AuthModules.AuthController.Login (API). Actions require a unique method/path combination for Swagger/OpenAPI 2.0 and 3.0. Use ConflictingActionsResolver as a workaround or provide your own implementation of PathGroupSelector. |    at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.PrepareGenerateOperation(IGrouping`2 group)
+   at System.Linq.Enumerable.IteratorSelectIterator`2.MoveNext()
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GenerateOperationsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository, Func`4 operationsGenerator)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GeneratePathsAsync(OpenApiDocument document, IEnumerable`1 apiDescriptions, SchemaRepository schemaRepository)
+   at Swashbuckle.AspNetCore.SwaggerGen.SwaggerGenerator.GetSwaggerAsync(String documentName, String host, String basePath)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at API.Middlewares.ExceptionHandlingMiddleware.Invoke(HttpContext context)

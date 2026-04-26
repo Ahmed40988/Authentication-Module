@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Text;
 using System.Text.Json;
 
-namespace WebApplication1.Infrastructure.Localizer
+namespace Infrastructure.Localizer
 {
     public class JsonStringLocalizer : IStringLocalizer
     {

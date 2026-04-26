@@ -4,6 +4,7 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260426141636_Add IAuditableEntity ")]
+    partial class AddIAuditableEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,11 +33,8 @@ namespace Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedById")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("ExpiresOn")
                         .HasColumnType("datetime2");
@@ -46,21 +46,11 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CreatedById");
-
-                    b.HasIndex("UpdatedById");
 
                     b.HasIndex("UserId");
 
@@ -332,25 +322,11 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.AuthModule.RefreshToken", b =>
                 {
-                    b.HasOne("Domain.Entities.AuthModules.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedById")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("Domain.Entities.AuthModules.User", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedById")
-                        .OnDelete(DeleteBehavior.NoAction);
-
                     b.HasOne("Domain.Entities.AuthModules.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
 
                     b.Navigation("User");
                 });

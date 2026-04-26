@@ -18,5 +18,19 @@ namespace API.Controllers.AuthModules
             var result = await _mediator.Send(command);
             return StatusCode(result.StatusCode, result);
         }
+
+        [HttpPost("Login/")]
+        public async Task<ActionResult> Login([FromBody] LoginCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        [HttpPost("confirm-email")]
+        public async Task<IActionResult> ConfirmEmail([FromBody] ConfirmEmailCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return StatusCode(result.StatusCode, result);
+        }
     }
 }

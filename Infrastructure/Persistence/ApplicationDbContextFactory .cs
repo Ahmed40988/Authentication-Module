@@ -15,9 +15,18 @@ namespace Infrastructure.Persistence
                 .Build();
 
             var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
-            optionsBuilder.UseSqlServerWithRetry(configuration.GetConnectionString("DefaultConnection"));
+            optionsBuilder.UseSqlServer(
+                configuration.GetConnectionString("DefaultConnection")
+            );
 
-            return new ApplicationDbContext(optionsBuilder.Options);
+            
+            var httpContextAccessor = new HttpContextAccessor();
+
+            return new ApplicationDbContext(
+                optionsBuilder.Options,
+                httpContextAccessor,
+                configuration
+            );
         }
     }
 }
