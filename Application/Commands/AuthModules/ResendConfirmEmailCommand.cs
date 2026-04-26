@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 namespace Application.Commands.AuthModules
 {
-    public class ResendConfirmEmailCommand
-    {
-
-    }
+    public record ResendConfirmationEmailCommand(string Email)
+      : IRequest<Result<bool>>;
 }

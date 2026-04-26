@@ -1,83 +1,60 @@
-﻿//using Application.Commands.AuthModules;
-//using Application.DTO.Auth;
-//using Application.Interfaces.Auth;
-//using Domain.Entities.AuthModules;
-//using MediatR;
-//using Microsoft.AspNetCore.Identity;
-//using Microsoft.EntityFrameworkCore;
-//using Microsoft.Extensions.Localization;
-//using System.Data;
+﻿using Application.Commands.AuthModules;
+using Application.DTO.AuthModules;
+using Application.Interfaces.Auth;
+using Domain.Entities.AuthModules;
+using MediatR;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Localization;
 
-//namespace Application.Handlers.AuthModules
-//{
-//    public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<LoginResponseDTO>>
-//    {
-//        private readonly UserManager<User> _manager;
-//        private readonly IStringLocalizer _localizer;
-//        private readonly ITokenService _tokenService;
-//        private readonly Interfaces.Auth.IAuthRepository _authRepository;
+namespace Application.Handlers.AuthModules
+{
+    public class LoginCommandHandler(
+        UserManager<User> userManager,
+        ITokenService tokenService,
+        IStringLocalizer localizer
+    ) : IRequestHandler<LoginCommand, Result<LoginResponseDto>>
+    {
+        private readonly UserManager<User> _userManager = userManager;
+        private readonly ITokenService _tokenService = tokenService;
+        private readonly IStringLocalizer _localizer = localizer;
 
-//        public LoginCommandHandler(IStringLocalizer localizer, UserManager<User> manager, ITokenService tokenService, Interfaces.Auth.IAuthRepository authRepository)
-//        {
-//            _localizer = localizer;
-//            _manager = manager;
-//            _tokenService = tokenService;
-//            _authRepository = authRepository;
-//        }
-//        public async Task<Result<LoginResponseDTO>> Handle(LoginCommand request, CancellationToken cancellationToken)
-//        {
-//            var user = await _manager.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
-//            if (user == null)
-//                return Result<LoginResponseDTO>.Error(_localizer["InvalidCredentials"], 401);
+        public async Task<Result<LoginResponseDto>> Handle(LoginCommand request, CancellationToken cancellationToken)
+        {
+            var user = await _userManager.FindByEmailAsync(request.Email);
 
-//            var isPasswordValid = await _manager.CheckPasswordAsync(user, request.Password);
+            if (user == null)
+                return Result<LoginResponseDto>.Failure(_localizer["UserNotfound"], 404);
 
+            if (!user.EmailConfirmed)
+                return Result<LoginResponseDto>.Failure(_localizer["Accountnotverified"], 400);
 
-//            if (!isPasswordValid)
-//                return Result<LoginResponseDTO>.Error(_localizer["InvalidCredentials"], 401);
+            if (user.LockoutEnabled && user.LockoutEnd != null && user.LockoutEnd > DateTimeOffset.UtcNow)
+                return Result<LoginResponseDto>.Failure(_localizer["Accountlocked"], 400);
 
-//            var tokenResult = await _tokenService.GenerateJwtToken(user);
+            var validPassword = await _userManager.CheckPasswordAsync(user, request.Password);
 
-//            var refreshToken = await _tokenService.GenerateRefreshToken(user);
+            if (!validPassword)
+                return Result<LoginResponseDto>.Failure(_localizer["Invalidcredentials"], 400);
 
-//            var roles = await _manager.GetRolesAsync(user);
-//            var roleName = roles.FirstOrDefault();
+            var jwt = await _tokenService.GenerateJwtToken(user);
+            var refreshToken = await _tokenService.GenerateRefreshToken(user);
 
+            var response = new LoginResponseDto
+            {
+                AccessToken = jwt.Token,
+                AccessTokenExpiresAt = jwt.ExpiresAt,
+                RefreshToken = refreshToken.Token,
+                RefreshTokenExpiresAt = refreshToken.ExpiresOn,
+                User = new UserDto
+                {
+                    Id = user.Id,
+                    FullName = user.FullName,
+                    Email = user.Email ?? string.Empty,
+                    IsVerified = user.EmailConfirmed
+                }
+            };
 
-//            List<string> permissionNames;
-//            if (roleName == "SuperAdmin")
-//            {
-//                permissionNames = await _authRepository.GetAllPermissionNamesAsync();
-//            }
-//            else
-//            {
-//                var role = await _authRepository.GetRoleByNameAsync(roleName);
-//                var permissions = await _authRepository.GetPermissionsByRoleIdAsync(role.Id);
-//                permissionNames = permissions.Select(p => p.Name).ToList();
-//            }
-
-//            var response = new LoginResponseDTO
-//            {
-//                // Tokens
-//                Token = tokenResult.Token,
-//                TokenExpiresAt = tokenResult.ExpiresAt,
-//                RefreshToken = refreshToken.Token,
-//                RefreshTokenExpiresAt = refreshToken.ExpiresOn,
-
-//                Role = new RoleDTO { Id = roleName ?? string.Empty, Name = roleName ?? string.Empty },
-//                Permissions = permissionNames,
-
-//                UserId = user.Id,
-//                FullName = user.FullName,
-//                Email = user.Email,
-
-//            };
-
-//            return Result<LoginResponseDTO>.Success(
-//                response,
-//                _localizer["LoginSuccessfully"],
-//                200);
-
-//        }
-//    }
-//}
+            return Result<LoginResponseDto>.Success(response, _localizer["Loginsuccessful"]);
+        }
+    }
+}

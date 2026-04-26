@@ -1,21 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.DTO.Auth
+﻿namespace Application.DTO.AuthModules
 {
-    public class LoginResponseDTO
+    public class LoginResponseDto
     {
-        public string Token { get; set; } = string.Empty;
-        public DateTime TokenExpiresAt { get; set; }
+        public string AccessToken { get; set; } = string.Empty;
+        public DateTime AccessTokenExpiresAt { get; set; }
         public string RefreshToken { get; set; } = string.Empty;
         public DateTime RefreshTokenExpiresAt { get; set; }
-        public RoleDTO Role { get; set; } = new();
-        public List<string> Permissions { get; set; } = new();
-        public string UserId { get; set; } = string.Empty;
+        public UserDto User { get; set; } = new();
+    }
+
+    public class UserDto
+    {
+        public string Id { get; set; } = string.Empty;
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
+        public bool IsVerified { get; set; }
     }
 }

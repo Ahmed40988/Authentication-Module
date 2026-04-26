@@ -60,7 +60,7 @@ if (app.Environment.IsDevelopment())
 }
 app.MapGet("/", () => Results.Redirect("/swagger"));
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

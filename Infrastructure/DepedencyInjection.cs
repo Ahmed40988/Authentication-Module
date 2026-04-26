@@ -12,6 +12,7 @@ using Microsoft.Extensions.Localization;
 using ServiceStack.Auth;
 using Infrastructure.Localizer;
 using Infrastructure.Services.Hasher;
+using Infrastructure.Repositories;
 
 namespace Infrastructure
 {
@@ -50,6 +51,7 @@ namespace Infrastructure
             services.AddScoped<IApplicationDbContext>(provider =>
                  provider.GetRequiredService<ApplicationDbContext>());
             services.AddScoped<IHasherService, HasherService>();
+            services.AddScoped<IGetCurrentUserRepository, GetCurrentUserRepository>();
 
             return services;
         }

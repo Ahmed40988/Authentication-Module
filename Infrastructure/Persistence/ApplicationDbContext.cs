@@ -73,27 +73,31 @@ namespace Infrastructure.Persistence
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
             var entries = ChangeTracker.Entries<IAuditableEntity>();
+            var currentUserId = _httpContext.HttpContext?.User?.GetUserId();
+            var isAuthenticated = _httpContext.HttpContext?.User?.Identity?.IsAuthenticated == true;
 
-            var currentUserId = _httpContext.HttpContext?.User?.GetUserId() ?? "System";
             var now = GetAppNow();
 
             foreach (var entityEntry in entries)
             {
                 if (entityEntry.State == EntityState.Added)
                 {
-                    entityEntry.Property(x => x.CreatedById).CurrentValue = currentUserId;
                     entityEntry.Property(x => x.CreatedAt).CurrentValue = now;
+
+                    if (isAuthenticated && currentUserId != null)
+                        entityEntry.Property(x => x.CreatedById).CurrentValue = currentUserId;
                 }
                 else if (entityEntry.State == EntityState.Modified)
                 {
                     entityEntry.Property(x => x.CreatedById).IsModified = false;
                     entityEntry.Property(x => x.CreatedAt).IsModified = false;
 
-                    entityEntry.Property(x => x.UpdatedById).CurrentValue = currentUserId;
                     entityEntry.Property(x => x.UpdatedAt).CurrentValue = now;
+
+                    if (isAuthenticated && currentUserId != null)
+                        entityEntry.Property(x => x.UpdatedById).CurrentValue = currentUserId;
                 }
             }
-
             return base.SaveChangesAsync(cancellationToken);
         }
         private static TimeZoneInfo ResolveAppTimeZone(IConfiguration configuration)
