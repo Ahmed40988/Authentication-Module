@@ -1,5 +1,4 @@
 ﻿using Application.Commands.AuthModules;
-using Application.Common.Abstractions;
 using Application.DTO.User;
 using Application.Interfaces;
 using Application.Interfaces.Auth;
@@ -8,15 +7,8 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Localization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace Application.Handlers
+namespace Application.Handlers.AuthModules
 {
     public class RegisterUserCommandHandler(UserManager<User> userManager
         ,IApplicationDbContext context

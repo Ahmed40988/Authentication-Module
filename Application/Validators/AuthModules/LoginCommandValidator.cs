@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.Commands.AuthModules;
-using FluentValidation;
+﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
 
-namespace Application.Validators.AuthModules
+namespace Application.Commands.AuthModules
 {
     public class LoginCommandValidator : AbstractValidator<LoginCommand>
     {
-        public LoginCommandValidator()
+        public LoginCommandValidator(IStringLocalizer localizer)
         {
             RuleFor(x => x.Email)
-                .NotEmpty().WithMessage("Email is required.")
-                .EmailAddress().WithMessage("Invalid email format.");
+                .NotEmpty().WithMessage(localizer["Emailrequired"])
+                .EmailAddress().WithMessage(localizer["Invalidemail"]);
+
             RuleFor(x => x.Password)
-                .NotEmpty().WithMessage("Password is required.")
-                .MinimumLength(8).WithMessage("Password must be at least 8 characters long.");
+                .NotEmpty().WithMessage(localizer["Passwordrequired"]);
         }
     }
 }

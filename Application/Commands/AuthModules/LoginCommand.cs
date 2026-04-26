@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.DTO.Auth;
-using Domain.Entities.AuthModules;
+﻿using Application.DTO.Auth;
+using Application.DTO.AuthModules;
 using MediatR;
 
 namespace Application.Commands.AuthModules
 {
-    public class LoginCommand : IRequest<Result<LoginResponseDTO>>
-    {
-        public string Email { get; set; }
-        public string Password { get; set; }
-    }
+    public record LoginCommand(string Email, string Password)
+        : IRequest<Result<LoginResponseDto>>;
 }
