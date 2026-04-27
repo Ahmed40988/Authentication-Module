@@ -81,6 +81,21 @@ namespace API.Controllers.AuthModules
             var result = await _mediator.Send(new GetMyPermissionsQuery());
             return StatusCode(result.StatusCode, result);
         }
+        [HttpGet("me")]
+        [Authorize]
+        public async Task<IActionResult> GetCurrentUser()
+        {
+            var result = await _mediator.Send(new GetCurrentUserProfileQuery());
+            return StatusCode(result.StatusCode, result);
+        }
+
+
+        [HttpPost("validate-token")]
+        public async Task<IActionResult> ValidateToken()
+        {
+            var result = await _mediator.Send(new ValidateTokenCommand());
+            return StatusCode(result.StatusCode, result);
+        }
 
 
     }
