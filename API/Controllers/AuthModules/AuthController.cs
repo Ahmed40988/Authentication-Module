@@ -1,5 +1,7 @@
-﻿using Application.Commands.AuthModules;
+﻿using API.Filters;
+using Application.Commands.AuthModules;
 using Application.Commands.AuthModules.Application.Commands.AuthModules;
+using Application.Common.Abstractions.Consts;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
@@ -34,6 +36,7 @@ namespace API.Controllers.AuthModules
             return StatusCode(result.StatusCode, result);
         }
         [HttpPost("logout")]
+        [HasPermission(Permissions.AuthManage)]
         public async Task<IActionResult> Logout([FromBody] LogoutCommand command)
         {
             var result = await _mediator.Send(command);
@@ -71,7 +74,7 @@ namespace API.Controllers.AuthModules
             return StatusCode(result.StatusCode, result);
         }
         [HttpPost("change-password")]
-        [Authorize]
+        [HasPermission(Permissions.AuthManage)]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordCommand command)
         {
             var result = await _mediator.Send(command);

@@ -17,6 +17,7 @@ namespace Infrastructure.Data.Seeder.IdentitySeed
                 var admin = new User
                 {
                     UserName = "admin",
+                    FullName = "Admin",
                     Email = email,
                     EmailConfirmed = true
                 };

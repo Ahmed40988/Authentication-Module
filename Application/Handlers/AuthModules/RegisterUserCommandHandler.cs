@@ -45,12 +45,12 @@ namespace Application.Handlers.AuthModules
 
                 //TODO assign default role to user after Seeding Roles in Database
 
-                //var roleResult = await _userManager.AddToRoleAsync(user, "User");
-                //if (!roleResult.Succeeded)
-                //{
-                //    var error = roleResult.Errors.Select(e => e.Description).First();
-                //    return Result<UserResponseDto>.Failure(_localizer["Userregistrationfailed"] + ": " + error, 400);
-                //}
+                var roleResult = await _userManager.AddToRoleAsync(user, "User");
+                if (!roleResult.Succeeded)
+                {
+                    var error = roleResult.Errors.Select(e => e.Description).First();
+                    return Result<UserResponseDto>.Failure(_localizer["Userregistrationfailed"] + ": " + error, 400);
+                }
                 var otp = new Random().Next(100000, 999999).ToString();
                 var hashedOtp = _hasher.Hash(otp);
                 _memoryCache.Set($"EmailOTP_{request.Email}", hashedOtp, TimeSpan.FromMinutes(5));
