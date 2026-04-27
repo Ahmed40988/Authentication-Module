@@ -3,14 +3,11 @@ using API.Extensions;
 using API.Middlewares;
 using Application;
 using Application.Common.Abstractions;
-using Application.Interfaces;
-using Domain.Entities.AuthModules;
 using Infrastructure;
-using Microsoft.AspNetCore.Identity;
+using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
-using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +31,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddMemoryCache();
 
 var app = builder.Build();
+await app.InitializeAsync();
+
+
 // Localization configuration
 var supportedCultures = new[] { "en", "ar" };
 

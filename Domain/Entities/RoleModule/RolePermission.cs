@@ -11,11 +11,10 @@ namespace Domain.Entities.RoleModule
     public class RolePermission
     {
         [Key]
-        public Guid RolePermission_Id { get; set; }
-        public string Role_Id { get; set; } 
-        public Guid Permission_Id { get; set; }
-
-        public IdentityRole Role { get; set; }
-        public Permission Permission { get; set; }
+        public Guid RolePermissionId { get; set; }
+        public string RoleId { get; set; } =string.Empty;
+        public Guid PermissionId { get; set; }
+        public IdentityRole Role { get; set; } = default!;
+        public Permission Permission { get; set; }=default!;
     }
 }
