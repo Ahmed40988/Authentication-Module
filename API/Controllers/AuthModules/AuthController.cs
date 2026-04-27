@@ -1,11 +1,5 @@
-﻿using API.Filters;
-using Application.Commands.AuthModules;
-using Application.Commands.AuthModules.Application.Commands.AuthModules;
-using Application.Common.Abstractions.Consts;
-using MediatR;
+﻿using Application.Queries.Users;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components.Forms;
-using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.AuthModules
 {
@@ -80,5 +74,14 @@ namespace API.Controllers.AuthModules
             var result = await _mediator.Send(command);
             return StatusCode(result.StatusCode, result);
         }
+        [HttpGet("me/permissions")]
+        [Authorize]
+        public async Task<IActionResult> GetMyPermissions()
+        {
+            var result = await _mediator.Send(new GetMyPermissionsQuery());
+            return StatusCode(result.StatusCode, result);
+        }
+
+
     }
 }

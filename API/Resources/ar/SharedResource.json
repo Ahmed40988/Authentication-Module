@@ -58,5 +58,7 @@
   "Invalidtoken": "الرمز غير صالح.",
   "Expiredtoken": "انتهت صلاحية الرمز.",
   "Otpverifiedsuccessfully": "تم التحقق من رمز التحقق بنجاح.",
-  "Loginsuccessful": "تم تسجيل الدخول بنجاح."
+  "Loginsuccessful": "تم تسجيل الدخول بنجاح.",
+  "Rolesassignedsuccessfully": "تم تعيين الأدوار بنجاح.",
+  "Operationcompletedsuccessfully" : "تم إكمال العملية بنجاح."
 }

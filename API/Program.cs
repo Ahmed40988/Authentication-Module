@@ -5,6 +5,7 @@ using Application;
 using Application.Common.Abstractions;
 using Infrastructure;
 using Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
@@ -29,6 +30,7 @@ builder.Services.AddInfrastructureDependencies(builder.Configuration);
 builder.Services.AddDataProtection();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddMemoryCache();
+builder.Services.AddScoped<IAuthorizationHandler, PermissionHandler>();
 
 var app = builder.Build();
 await app.InitializeAsync();

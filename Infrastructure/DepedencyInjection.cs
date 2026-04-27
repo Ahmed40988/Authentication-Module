@@ -1,18 +1,19 @@
 ﻿using Application.Interfaces;
 using Application.Interfaces.Auth;
 using Domain.Entities.AuthModules;
+using Infrastructure.Localizer;
 using Infrastructure.Persistence;
+using Infrastructure.Repositories;
 using Infrastructure.Services.AuthModules;
 using Infrastructure.Services.Email;
+using Infrastructure.Services.Hasher;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using ServiceStack.Auth;
-using Infrastructure.Localizer;
-using Infrastructure.Services.Hasher;
-using Infrastructure.Repositories;
 
 namespace Infrastructure
 {
@@ -52,6 +53,8 @@ namespace Infrastructure
                  provider.GetRequiredService<ApplicationDbContext>());
             services.AddScoped<IHasherService, HasherService>();
             services.AddScoped<IGetCurrentUserRepository, GetCurrentUserRepository>();
+
+        
 
             return services;
         }

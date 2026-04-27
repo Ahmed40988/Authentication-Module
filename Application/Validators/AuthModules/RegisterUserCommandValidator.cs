@@ -1,9 +1,4 @@
-﻿using Application.Commands.AuthModules;
-using Applicationtions.Consts;
-using FluentValidation;
-using Microsoft.Extensions.Localization;
-
-namespace Application.Validators.AuthModules
+﻿namespace Application.Validators.AuthModules
 {
     public class RegisterUserCommandValidator : AbstractValidator<RegisterUserCommand>
     {

@@ -1,12 +1,6 @@
-﻿using Application.Commands.AuthModules.Application.Commands.AuthModules;
-using Application.DTO.AuthModules;
-using Application.Interfaces;
+﻿using Application.DTO.AuthModules;
 using Application.Interfaces.Auth;
-using Domain.Entities.AuthModule;
-using Domain.Entities.AuthModules;
-using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Localization;
 
 namespace Application.Handlers.AuthModules
 {
