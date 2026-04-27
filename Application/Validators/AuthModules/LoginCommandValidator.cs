@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using Microsoft.Extensions.Localization;
-
-namespace Application.Commands.AuthModules
+﻿namespace Application.Commands.AuthModules
 {
     public class LoginCommandValidator : AbstractValidator<LoginCommand>
     {

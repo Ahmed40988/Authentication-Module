@@ -43,5 +43,6 @@
   "Otpverifiedsuccessfully": "OTP verified successfully.",
   "Loginsuccessful": "Login successful.",
   "AccountNotVerified": "Account is not verified. Please verify your account to proceed.",
-    "AccountLocked": "Account is temporarily locked due to multiple failed login attempts. Please try again after a short period.",
+  "Rolesassignedsuccessfully": "Roles assigned successfully.",
+  "Operationcompletedsuccessfully" : "Operation completed successfully."
 }
