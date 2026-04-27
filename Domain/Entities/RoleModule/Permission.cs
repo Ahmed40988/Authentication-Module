@@ -10,10 +10,8 @@ namespace Domain.Entities.RoleModule
     public class Permission
     {
         [Key]
-        public Guid Permission_Id { get; set; }
-        public string Permission_Name { get; set; }
-
-
-        public ICollection<RolePermission> RolePermissions { get; set; }
+        public Guid PermissionId { get; set; }
+        public string PermissionName { get; set; } = string.Empty;
+        public ICollection<RolePermission> RolePermissions { get; set; }= new List<RolePermission>();
     }
 }
