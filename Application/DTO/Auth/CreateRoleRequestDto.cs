@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.DTO.Auth
 {
-    public record RoleDto(
-        string Id,
-        string Name
-    );
+        public record CreateRoleRequestDto(
+            string Name
+        );
+    
 }
