@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTO.Auth
+namespace Application.Queries.AuthModules
 {
-    public record RoleDto(
-        string Id,
-        string Name
-    );
+    public record GetPermissionsQuery() : IRequest<Result<List<string>>>;
 }

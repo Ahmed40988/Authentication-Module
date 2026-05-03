@@ -44,5 +44,14 @@
   "Loginsuccessful": "Login successful.",
   "AccountNotVerified": "Account is not verified. Please verify your account to proceed.",
   "Rolesassignedsuccessfully": "Roles assigned successfully.",
-  "Operationcompletedsuccessfully" : "Operation completed successfully."
+  "Operationcompletedsuccessfully": "Operation completed successfully.",
+  "Rolerequired": "Role is required.",
+  "RoleAlreadyExists": "Role already exists.",
+  "RoleNotFound": "Role not found.",
+  "Operationfailed": "Operation failed.",
+  "RoleCreated": "Role created successfully.",
+  "RoleUpdated": "Role updated successfully.",
+  "RoleDeleted": "Role deleted successfully.",
+  "PermissionsFetched": "Permissions retrieved successfully."
+
 }

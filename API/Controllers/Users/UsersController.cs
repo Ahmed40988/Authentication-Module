@@ -1,5 +1,4 @@
 ﻿using Application.Queries.Users;
-
 namespace API.Controllers.AuthModules
 {
     [ApiController]
@@ -7,11 +6,9 @@ namespace API.Controllers.AuthModules
     public class UsersController(IMediator mediator) : ControllerBase
     {
         private readonly IMediator _mediator = mediator;
-       
-
 
         [HttpPost("{userId}/roles")]
-        [HasPermission(Permissions.RolesUpdate)]
+        [HasPermission(Permissions.RolesUpdate)] 
         public async Task<IActionResult> AssignRoles(string userId, [FromBody] List<string> roles)
         {
             var command = new AssignRolesToUserCommand(userId, roles);
@@ -20,13 +17,11 @@ namespace API.Controllers.AuthModules
         }
 
         [HttpGet("{userId}/roles")]
-        [HasPermission(Permissions.RolesRead)]
+        [HasPermission(Permissions.RolesRead)] 
         public async Task<IActionResult> GetUserRoles(string userId)
         {
             var result = await _mediator.Send(new GetUserRolesQuery(userId));
             return StatusCode(result.StatusCode, result);
         }
-
-
     }
 }
