@@ -32,11 +32,10 @@ public class ExceptionHandlingMiddleware(RequestDelegate next, ILogger<Exception
 
         switch (exception)
         {
-            case ValidationExceptions ve:
+            case ValidationException ve:
                 status = HttpStatusCode.BadRequest;
-                var firstValidation = ve.Errors.Values.SelectMany(v => v).FirstOrDefault()
-                    ?? "Validation failed.";
-                result = Result<object>.Failure(firstValidation, 400);
+                var errors = ve.Errors.Select(e => e.ErrorMessage).ToList();
+                result = Result<object>.Failure(errors.FirstOrDefault() ?? "Validation failed", 400);
                 break;
 
             case NotFoundException ne:
