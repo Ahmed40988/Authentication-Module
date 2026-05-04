@@ -6,8 +6,7 @@
         {
             RuleFor(x => x.name)
                 .NotEmpty()
-              .WithMessage(localizer["Rolerequired"])
-                .MinimumLength(3);
+              .WithMessage(localizer["Rolerequired"]);
         }
     }
 }
