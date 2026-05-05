@@ -2,7 +2,14 @@
 using Domain.Entities.AuthModule;
 using Domain.Entities.AuthModules;
 using Domain.Entities.Base;
+using Domain.Entities.BrandCategories;
+using Domain.Entities.Cataloges;
+using Domain.Entities.Categories;
+using Domain.Entities.Departments;
+using Domain.Entities.Employees;
+using Domain.Entities.Products;
 using Domain.Entities.RoleModule;
+using Domain.Entities.SubSubCategories;
 using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -31,37 +38,20 @@ namespace Infrastructure.Persistence
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<User> ApplicationUsers { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Category> Categories { get; set; }
+       public  DbSet<BrandCategory> BrandCategories { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
+        public DbSet<SubSubCategory> SubSubCategories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<Department>  departments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-
-            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-            {
-                var clrType = entityType.ClrType;
-
-                if (clrType == null)
-                    continue;
-
-                if (!typeof(IAuditableEntity).IsAssignableFrom(clrType)
-          || clrType == typeof(User)
-          || clrType == typeof(BaseEntity))
-                    continue;
-
-                modelBuilder.Entity(clrType)
-                    .HasOne(typeof(User), "CreatedBy")
-                    .WithMany()
-                    .HasForeignKey("CreatedById")
-                    .OnDelete(DeleteBehavior.NoAction);
-
-                modelBuilder.Entity(clrType)
-                    .HasOne(typeof(User), "UpdatedBy")
-                    .WithMany()
-                    .HasForeignKey("UpdatedById")
-                    .OnDelete(DeleteBehavior.NoAction);
-            }
 
             modelBuilder.Entity<RefreshToken>()
                 .HasOne(r => r.User)

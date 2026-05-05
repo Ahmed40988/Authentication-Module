@@ -11,8 +11,6 @@ namespace Infrastructure.Configurations.UserConfiguration
             builder.Property(x => x.FullName)
                 .HasMaxLength(50)
                 .IsRequired();
-
-
         }
     }
 }

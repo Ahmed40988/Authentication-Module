@@ -1,4 +1,4 @@
-﻿global using Application.Common.Abstractions;
+﻿global using Domain.Common;
 global using MediatR;
 global using FluentValidation;
 global using Application.Commands.AuthModules;

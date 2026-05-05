@@ -4,6 +4,7 @@ using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260505121506_AddEmployeeandCatalogModule")]
+    partial class AddEmployeeandCatalogModule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,32 +222,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Categories", (string)null);
                 });
 
-            modelBuilder.Entity("Domain.Entities.Departments.Department", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CreatedById")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departments", (string)null);
-                });
-
             modelBuilder.Entity("Domain.Entities.Employees.Employee", b =>
                 {
                     b.Property<Guid>("Id")
@@ -257,16 +234,10 @@ namespace Infrastructure.Migrations
                     b.Property<string>("CreatedById")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
-
-                    b.Property<DateTime>("HireDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
@@ -276,13 +247,10 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("Status")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
                         .HasMaxLength(50)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -291,8 +259,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("Email")
                         .IsUnique();
@@ -355,9 +321,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UpdatedById")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("imageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -712,7 +675,8 @@ namespace Infrastructure.Migrations
                                 .HasForeignKey("BrandId");
                         });
 
-                    b.Navigation("Description");
+                    b.Navigation("Description")
+                        .IsRequired();
 
                     b.Navigation("Name")
                         .IsRequired();
@@ -774,69 +738,8 @@ namespace Infrastructure.Migrations
                                 .HasForeignKey("CategoryId");
                         });
 
-                    b.Navigation("Description");
-
-                    b.Navigation("Name")
+                    b.Navigation("Description")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Domain.Entities.Departments.Department", b =>
-                {
-                    b.OwnsOne("Domain.Common.ValueObjects.LocalizedString", "Description", b1 =>
-                        {
-                            b1.Property<Guid>("DepartmentId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Ar")
-                                .IsRequired()
-                                .HasMaxLength(1000)
-                                .HasColumnType("nvarchar(1000)")
-                                .HasColumnName("DescriptionAr");
-
-                            b1.Property<string>("En")
-                                .IsRequired()
-                                .HasMaxLength(1000)
-                                .HasColumnType("nvarchar(1000)")
-                                .HasColumnName("DescriptionEn");
-
-                            b1.HasKey("DepartmentId");
-
-                            b1.ToTable("Departments");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DepartmentId");
-                        });
-
-                    b.OwnsOne("Domain.Common.ValueObjects.LocalizedString", "Name", b1 =>
-                        {
-                            b1.Property<Guid>("DepartmentId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Ar")
-                                .IsRequired()
-                                .HasMaxLength(200)
-                                .HasColumnType("nvarchar(200)")
-                                .HasColumnName("NameAr");
-
-                            b1.Property<string>("En")
-                                .IsRequired()
-                                .HasMaxLength(200)
-                                .HasColumnType("nvarchar(200)")
-                                .HasColumnName("NameEn");
-
-                            b1.HasKey("DepartmentId");
-
-                            b1.HasIndex("Ar");
-
-                            b1.HasIndex("En");
-
-                            b1.ToTable("Departments");
-
-                            b1.WithOwner()
-                                .HasForeignKey("DepartmentId");
-                        });
-
-                    b.Navigation("Description");
 
                     b.Navigation("Name")
                         .IsRequired();
@@ -844,12 +747,6 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Employees.Employee", b =>
                 {
-                    b.HasOne("Domain.Entities.Departments.Department", "Department")
-                        .WithMany("Employees")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.OwnsOne("Domain.Common.ValueObjects.LocalizedString", "FullName", b1 =>
                         {
                             b1.Property<Guid>("EmployeeId")
@@ -874,8 +771,6 @@ namespace Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("EmployeeId");
                         });
-
-                    b.Navigation("Department");
 
                     b.Navigation("FullName")
                         .IsRequired();
@@ -983,7 +878,8 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("Description");
+                    b.Navigation("Description")
+                        .IsRequired();
 
                     b.Navigation("Name")
                         .IsRequired();
@@ -1024,31 +920,6 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.OwnsOne("Domain.Common.ValueObjects.LocalizedString", "Description", b1 =>
-                        {
-                            b1.Property<Guid>("SubCategoryId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Ar")
-                                .IsRequired()
-                                .HasMaxLength(1000)
-                                .HasColumnType("nvarchar(1000)")
-                                .HasColumnName("DescriptionAr");
-
-                            b1.Property<string>("En")
-                                .IsRequired()
-                                .HasMaxLength(1000)
-                                .HasColumnType("nvarchar(1000)")
-                                .HasColumnName("DescriptionEn");
-
-                            b1.HasKey("SubCategoryId");
-
-                            b1.ToTable("SubCategories");
-
-                            b1.WithOwner()
-                                .HasForeignKey("SubCategoryId");
-                        });
-
                     b.OwnsOne("Domain.Common.ValueObjects.LocalizedString", "Name", b1 =>
                         {
                             b1.Property<Guid>("SubCategoryId")
@@ -1080,8 +951,6 @@ namespace Infrastructure.Migrations
 
                     b.Navigation("Category");
 
-                    b.Navigation("Description");
-
                     b.Navigation("Name")
                         .IsRequired();
                 });
@@ -1099,31 +968,6 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("SubCategoryId1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.OwnsOne("Domain.Common.ValueObjects.LocalizedString", "Description", b1 =>
-                        {
-                            b1.Property<Guid>("SubSubCategoryId")
-                                .HasColumnType("uniqueidentifier");
-
-                            b1.Property<string>("Ar")
-                                .IsRequired()
-                                .HasMaxLength(1000)
-                                .HasColumnType("nvarchar(1000)")
-                                .HasColumnName("DescriptionAr");
-
-                            b1.Property<string>("En")
-                                .IsRequired()
-                                .HasMaxLength(1000)
-                                .HasColumnType("nvarchar(1000)")
-                                .HasColumnName("DescriptionEn");
-
-                            b1.HasKey("SubSubCategoryId");
-
-                            b1.ToTable("SubSubCategories");
-
-                            b1.WithOwner()
-                                .HasForeignKey("SubSubCategoryId");
-                        });
 
                     b.OwnsOne("Domain.Common.ValueObjects.LocalizedString", "Name", b1 =>
                         {
@@ -1149,8 +993,6 @@ namespace Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("SubSubCategoryId");
                         });
-
-                    b.Navigation("Description");
 
                     b.Navigation("Name")
                         .IsRequired();
@@ -1226,11 +1068,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("BrandCategories");
 
                     b.Navigation("SubCategories");
-                });
-
-            modelBuilder.Entity("Domain.Entities.Departments.Department", b =>
-                {
-                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("Domain.Entities.RoleModule.Permission", b =>
