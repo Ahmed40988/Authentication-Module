@@ -3,6 +3,7 @@ using API.Extensions;
 using API.Middlewares;
 using Application;
 using Application.Common.Abstractions;
+using Domain.Common;
 using Infrastructure;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;

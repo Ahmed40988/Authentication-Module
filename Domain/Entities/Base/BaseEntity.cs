@@ -8,15 +8,27 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities.Base
 {
-    public class BaseEntity: IAuditableEntity
+    public abstract class BaseEntity : IAuditableEntity
     {
-        public string? CreatedById { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string? CreatedById { get; set; }
 
-        public string? UpdatedById { get; set; }
         public DateTime? UpdatedAt { get; set; }
+        public string? UpdatedById { get; set; }
+    
+        public bool IsActive { get; protected set; } = true;
 
-        public User? CreatedBy { get; set; }
-        public User? UpdatedBy { get; set; }
+        public void Deactivate()
+        {
+            IsActive = false;
+        }
+
+        public void Activate()
+        {
+            IsActive = true;
+        }
     }
+
+
 }
+
