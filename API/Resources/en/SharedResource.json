@@ -70,5 +70,10 @@
   "LogoSizeExceeded": "Image size must not exceed 2 MB.",
   "BrandNotFound": "Brand not found.",
   "CannotDeleteLinkedEntity": "Cannot delete this item because it is linked to other data.",
-  "FailedToDeleteBrand" : "Failed to delete brand. Please try again later."
+  "FailedToDeleteBrand": "Failed to delete brand. Please try again later.",
+  "CategoryAlreadyExists": "Category already exists.",
+  "CategoryNameRequired": "Category name is required.",
+  "CategoryNotFound": "Category not found.",
+  "FailedToDeleteCategory" : "Failed to delete category. Please try again later."
+
 }

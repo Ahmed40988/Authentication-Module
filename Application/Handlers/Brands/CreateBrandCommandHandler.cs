@@ -2,16 +2,19 @@
 using Application.Common.Helpers;
 
 using Domain.Entities.Cataloges;
+using Domain.Entities.Categories;
 
 namespace Application.Handlers.Brands
 {
     public class CreateBrandCommandHandler(
         IGenericRepositories<Brand> repo,
+         IGenericRepositories<Category> categoryRepo,
         IStringLocalizer localizer,
         IFileStorageService fileStorage
     ) : IRequestHandler<CreateBrandCommand, Result<Guid>>
-    {
+    {     
         private readonly IGenericRepositories<Brand> repo = repo;
+        private readonly IGenericRepositories<Category> categoryRepo = categoryRepo;
         private readonly IStringLocalizer localizer = localizer;
         private readonly IFileStorageService fileStorage = fileStorage;
 
@@ -44,8 +47,18 @@ namespace Application.Handlers.Brands
                 logoImagePath
             );
 
-            await repo.AddAsync(brand);
+            var validCategoryIds = new List<Guid>();
 
+            if (dto.CategoryIds is not null && dto.CategoryIds.Any())
+            {
+                validCategoryIds = await categoryRepo.Query()
+                    .Where(x => dto.CategoryIds.Contains(x.Id))
+                    .Select(x => x.Id)
+                    .ToListAsync(cancellationToken);
+            }
+            brand.AddCategories(validCategoryIds);
+
+            await repo.AddAsync(brand);
             return Result<Guid>.Success(
                 brand.Id,
                 localizer["Operationcompletedsuccessfully"]

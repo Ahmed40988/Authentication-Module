@@ -59,5 +59,17 @@ namespace Domain.Entities.Cataloges
             else
                 Activate();
         }
+        public void AddCategories(IEnumerable<Guid> categoryIds)
+        {
+            foreach (var categoryId in categoryIds.Distinct())
+            {
+                if (_brandCategories.Any(x => x.CategoryId == categoryId))
+                    continue;
+
+                _brandCategories.Add(
+                    new BrandCategory(Id, categoryId)
+                );
+            }
+        }
     }
 }

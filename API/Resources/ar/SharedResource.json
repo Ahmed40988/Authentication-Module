@@ -91,7 +91,12 @@
   "BrandAlreadyExists": "البراند موجود بالفعل.",
   "BrandNotFound": "البراند غير موجود.",
   "CannotDeleteLinkedEntity": "لا يمكن حذف هذا العنصر لارتباطه ببيانات أخرى.",
-  "FailedToDeleteBrand" : "فشل حذف البراند. تأكد من عدم ارتباطه ببيانات أخرى."
+  "FailedToDeleteBrand": "فشل حذف البراند. تأكد من عدم ارتباطه ببيانات أخرى.",
+  "CategoryAlreadyExists": "الفئة موجودة بالفعل.",
+  "CategoryNameRequired": "اسم الفئة مطلوب.",
+  "CategoryNotFound": "الفئة غير موجودة.",
+  "FailedToDeleteCategory": "فشل حذف الفئة. تأكد من عدم ارتباطها ببيانات أخرى."
+
 
 }
 
