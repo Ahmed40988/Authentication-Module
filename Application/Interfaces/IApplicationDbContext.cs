@@ -1,5 +1,4 @@
 using Domain.Entities.AuthModule;
-using Domain.Entities.AuthModules;
 using Domain.Entities.BrandCategories;
 using Domain.Entities.Cataloges;
 using Domain.Entities.Categories;
@@ -9,7 +8,6 @@ using Domain.Entities.Products;
 using Domain.Entities.RoleModule;
 using Domain.Entities.SubSubCategories;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Interfaces
 {

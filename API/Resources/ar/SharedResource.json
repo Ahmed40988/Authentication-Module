@@ -70,6 +70,28 @@
   "RoleCreated": "تم إنشاء الدور بنجاح.",
   "RoleUpdated": "تم تحديث الدور بنجاح.",
   "RoleDeleted": "تم حذف الدور بنجاح.",
-  "PermissionsFetched": "تم جلب الصلاحيات بنجاح."
+  "PermissionsFetched": "تم جلب الصلاحيات بنجاح.",
+
+  "CommonRequired": "هذا الحقل مطلوب.",
+  "CommonInvalid": "القيمة المدخلة غير صالحة.",
+  "CommonNotFound": "العنصر غير موجود.",
+  "CommonCannotDelete": "لا يمكن حذف هذا العنصر لارتباطه ببيانات أخرى.",
+  "EmployeeInvalidStatus": "حالة الموظف غير صالحة.",
+  "ProductInvalidQuantity": "الكمية غير صالحة.",
+  "ProductNotEnoughStock": "المخزون غير كافٍ.",
+  "InvalidDate": "التاريخ غير صالح.",
+  "AlreadyExists": "العنصر موجود بالفعل.",
+
+
+  "BrandDtoRequired": "بيانات البراند مطلوبة.",
+  "BrandIdRequired": "معرف البراند مطلوب.",
+  "BrandNameRequired": "اسم البراند مطلوب.",
+  "InvalidLogoType": "نوع الصورة غير مدعوم.",
+  "LogoSizeExceeded": "حجم الصورة يجب ألا يتجاوز 2 ميجا.",
+  "BrandAlreadyExists": "البراند موجود بالفعل.",
+  "BrandNotFound": "البراند غير موجود.",
+  "CannotDeleteLinkedEntity": "لا يمكن حذف هذا العنصر لارتباطه ببيانات أخرى.",
+  "FailedToDeleteBrand" : "فشل حذف البراند. تأكد من عدم ارتباطه ببيانات أخرى."
 
 }
+

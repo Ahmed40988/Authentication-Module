@@ -6,6 +6,7 @@ using Infrastructure.Persistence;
 using Infrastructure.Repositories;
 using Infrastructure.Services.AuthModules;
 using Infrastructure.Services.Email;
+using Infrastructure.Services.FileModules;
 using Infrastructure.Services.Hasher;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -42,19 +43,22 @@ namespace Infrastructure
             return services;
         }
 
-
+        
 
         public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
-           // services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
+            // services.AddScoped<IUnitOfWork>(serviceProvider => serviceProvider.GetRequiredService<ApplicationDbContext>());
+            services.AddScoped(typeof(IGenericRepositories<>), typeof(GenericRepository<>));
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IEmailService , EmailService>();
             services.AddScoped<IApplicationDbContext>(provider =>
                  provider.GetRequiredService<ApplicationDbContext>());
             services.AddScoped<IHasherService, HasherService>();
             services.AddScoped<IGetCurrentUserRepository, GetCurrentUserRepository>();
+            services.AddScoped<IFileStorageService, LocalFileStorageService>();
+            services.AddScoped<IBaseUrlService, BaseUrlService>();
 
-        
+
 
             return services;
         }

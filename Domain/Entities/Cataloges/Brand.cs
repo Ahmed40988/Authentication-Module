@@ -52,5 +52,12 @@ namespace Domain.Entities.Cataloges
 
             Description = LocalizedString.Create(en, ar);
         }
+        public void ToggleStatus()
+        {
+            if (IsActive)
+                Deactivate();
+            else
+                Activate();
+        }
     }
 }
