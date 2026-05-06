@@ -1,4 +1,6 @@
-﻿namespace Application.Common.Helpers
+﻿using Application.DTO.Localizes;
+
+namespace Application.Common.Helpers
 {
 
     public static class NormalizeHelper
@@ -21,4 +23,5 @@
         }
     }
 
-}
+    }
+

@@ -1,4 +1,6 @@
-﻿namespace Application.Common.Abstractions.Consts
+﻿using System;
+
+namespace Application.Common.Abstractions.Consts
 {
     public static class Permissions
     {
@@ -20,7 +22,13 @@
         public const string BrandsRead = "brands.read";
         public const string BrandsCreate = "brands.create";
         public const string BrandsUpdate = "brands.update";
-        public const string BrandsDelete = "brands.delete";        
+        public const string BrandsDelete = "brands.delete";     
+        
+        public const string CategoriesRead = "categories.read";
+        public const string CategoriesCreate = "categories.create";
+        public const string CategoriesUpdate = "categories.update";
+        public const string CategoriesDelete = "categories.delete";
+
        
     }
 }

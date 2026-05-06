@@ -40,6 +40,15 @@ namespace Domain.Entities.Categories
             Deactivate();
             return Result<bool>.Success(true);
         }
+
+        public void ToggleStatus()
+        {
+            if (IsActive)
+                Deactivate();
+            else
+                Activate();
+        }
+
         private void SetDescription(string? en, string? ar)
         {
             if (string.IsNullOrWhiteSpace(en) && string.IsNullOrWhiteSpace(ar))
