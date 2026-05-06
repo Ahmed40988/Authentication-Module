@@ -17,5 +17,10 @@
 
         public const string PermissionsRead = "permissions.read";
         public const string PermissionsAssign = "permissions.assign";
+        public const string BrandsRead = "brands.read";
+        public const string BrandsCreate = "brands.create";
+        public const string BrandsUpdate = "brands.update";
+        public const string BrandsDelete = "brands.delete";        
+       
     }
 }
