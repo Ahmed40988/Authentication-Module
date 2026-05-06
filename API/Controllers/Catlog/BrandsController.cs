@@ -53,7 +53,7 @@ namespace API.Controllers.Catalog
 
 
         [HttpPatch("{id:guid}/toggle-status")]
-        //[HasPermission(Permissions.BrandsUpdate)]
+        [HasPermission(Permissions.BrandsUpdate)]
         public async Task<IActionResult> ToggleStatus(Guid id)
         {
             var result = await _mediator.Send(new ToggleBrandStatusCommand(id));
