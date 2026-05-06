@@ -6,6 +6,7 @@
 *.sln.docstates
 **/bin/
 **/obj/
+.copilot-instructions.md
 
 # Build Folders
 bin/
