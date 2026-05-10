@@ -1,9 +1,10 @@
-using Application.Commands.Brands;
 using Application.DTO.Brands;
 using Application.DTO.Localizes;
 using Application.DTO.Products;
 using Application.Queries.Brands;
 using Domain.Entities.Cataloges;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Application.Handlers.Brands
 {
@@ -15,50 +16,67 @@ namespace Application.Handlers.Brands
         private readonly IGenericRepositories<Brand> repo = repo;
         private readonly IStringLocalizer localizer = localizer;
 
-        public async Task<Result<BrandDetailsDto>> Handle(GetBrandQuery request, CancellationToken cancellationToken)
+        public async Task<Result<BrandDetailsDto>> Handle(
+            GetBrandQuery request,
+            CancellationToken cancellationToken)
         {
             var brand = await repo.Query()
                 .Include(x => x.Products)
-                .FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+                    .ThenInclude(x => x.Category)
+                    .ThenInclude(x => x.SubCategories)
+                    .ThenInclude(x=>x.SubSubCategories)
+                .FirstOrDefaultAsync(
+                    x => x.Id == request.Id,
+                    cancellationToken
+                );
+
             if (brand is null)
-                return Result<BrandDetailsDto>.Failure(localizer["BrandNotFound"]);
+            {
+                return Result<BrandDetailsDto>.Failure(
+                    localizer["BrandNotFound"],
+                    404
+                );
+            }
 
-            var productsDto = brand.Products?
-                .Select(p => new ProductResponseDto
+            var productsDto = brand.Products
+                       .Select(product => new ProductResponseDto
                 (
-                    Id: p.Id,
+                    product.Id,
 
-                    Name: new LocalizedDto
+                    new LocalizedDto
                     {
-                        EN = p.Name.En,
-                        AR = p.Name.Ar
+                        EN = product.Name.En,
+                        AR = product.Name.Ar
                     },
 
-                    Description: p.Description is not null
+                    product.Description != null
                         ? new LocalizedDto
                         {
-                            EN = p.Description.En,
-                            AR = p.Description.Ar
+                            EN = product.Description.En,
+                            AR = product.Description.Ar
                         }
                         : null,
-                        p.SKU,
-                        p.Price,
-                        p.imageUrl,
-                        p.StockQuantity,
-                        p.Category?.Name?.En,
-                        p.IsActive,
-                        p.CreatedAt,
-                        p.UpdatedAt
-                        ))
-                        .ToList();
+                    product.SKU,
+                    product.Price,
+                    product.ImageUrl,
+                    product.StockQuantity,
+                    product.IsActive,
+                    product.BrandId,
+                    product.CategoryId,
+                    product.SubCategoryId,
+                    product.SubSubCategoryId
+                ))
+                .ToList();
 
-            var brandDto = new BrandDetailsDto(
+            var dto = new BrandDetailsDto
+            (
+                brand.Id,
                 new LocalizedDto
                 {
                     EN = brand.Name.En,
                     AR = brand.Name.Ar
                 },
-                brand.Description is not null
+                brand.Description != null
                     ? new LocalizedDto
                     {
                         EN = brand.Description.En,
@@ -70,7 +88,10 @@ namespace Application.Handlers.Brands
                 productsDto
             );
 
-            return Result<BrandDetailsDto>.Success(brandDto, localizer["Operationcompletedsuccessfully"]);
+            return Result<BrandDetailsDto>.Success(
+                dto,
+                localizer["Operationcompletedsuccessfully"]
+            );
         }
     }
 }

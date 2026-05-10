@@ -21,7 +21,7 @@ namespace Domain.Entities.Products
         public SubSubCategory? SubSubCategory { get; private set; }
         public string SKU { get; private set; } = string.Empty;
         public decimal Price { get; private set; }
-        public string ?imageUrl { get; private set; } = string.Empty;
+        public string ?ImageUrl { get; private set; } = string.Empty;
         public int StockQuantity { get; private set; }
 
         private Product() { }
@@ -34,7 +34,7 @@ namespace Domain.Entities.Products
             string sku,
             decimal price,
             int stock,
-            string ?ImageUrl,
+            string ?imageUrl,
             Guid brandId,
             Guid categoryId,
             Guid? subCategoryId,
@@ -54,15 +54,24 @@ namespace Domain.Entities.Products
             SubSubCategoryId = subSubCategoryId;
         }
 
-        public Result<bool> Update(string? nameEn, string? nameAr, decimal price, int stock,string ?desEn,string ?desAr)
+        public Result<bool> Update(string? nameEn, string? nameAr, decimal price, int stock,string ?imageUrl,string ?desEn,string ?desAr)
         {
             Name = LocalizedString.Create(nameEn, nameAr);
             SetPrice(price);
             SetStock(stock);
             SetDescription(desEn, desAr);
+            if (!string.IsNullOrWhiteSpace(imageUrl))
+                ImageUrl = imageUrl;
             return Result<bool>.Success(true);
         }
 
+        public void ToggleStatus()
+        {
+            if (IsActive)
+                Deactivate();
+            else
+                Activate();
+        }
         public Result<bool> ReduceStock(int quantity)
         {
             if (quantity <= 0)
