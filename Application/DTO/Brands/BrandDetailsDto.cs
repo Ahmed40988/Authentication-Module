@@ -4,6 +4,7 @@ using Application.DTO.Products;
 namespace Application.DTO.Brands
 {
     public record BrandDetailsDto(
+                Guid Id,
                 LocalizedDto Name,
                 LocalizedDto? Description,
                 string? LogoUrl,

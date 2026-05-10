@@ -25,22 +25,22 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(x => x.StockQuantity)
             .IsRequired();
 
-        builder.HasOne<Brand>()
+        builder.HasOne(x => x.Brand)
             .WithMany()
             .HasForeignKey(x => x.BrandId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasOne<Category>()
+        builder.HasOne(x => x.Category)
             .WithMany()
             .HasForeignKey(x => x.CategoryId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasOne<SubCategory>()
+        builder.HasOne(x => x.SubCategory)
             .WithMany()
             .HasForeignKey(x => x.SubCategoryId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasOne<SubSubCategory>()
+        builder.HasOne(x => x.SubSubCategory)
             .WithMany()
             .HasForeignKey(x => x.SubSubCategoryId)
             .OnDelete(DeleteBehavior.Restrict);

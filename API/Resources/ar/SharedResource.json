@@ -101,7 +101,22 @@
   "SubCategoryNameRequired": "اسم الفئة الفرعية مطلوب.",
   "SubSubCategoryAlreadyExists": "الفئة الفرعية الثانية موجودة بالفعل.",
   "SubSubCategoryNotFound": "الفئة الفرعية الثانية غير موجودة.",
-  "SubSubCategoryNameRequired": "اسم الفئة الفرعية الثانية مطلوب."
+  "SubSubCategoryNameRequired": "اسم الفئة الفرعية الثانية مطلوب.",
+
+
+  "ProductAlreadyExists": "المنتج موجود بالفعل.",
+  "ProductNotFound": "المنتج غير موجود.",
+  "ProductNameRequired": "اسم المنتج مطلوب.",
+  "SkuAlreadyExists": "رمز SKU موجود بالفعل.",
+  "SkuRequired": "رمز SKU مطلوب.",
+  "InvalidPrice": "السعر يجب أن يكون أكبر من أو يساوي 0.",
+  "InvalidStockQuantity": "الكمية يجب أن تكون أكبر من أو تساوي 0.",
+  "FailedToCreateProduct": "فشل في إنشاء المنتج.",
+  "FailedToUpdateProduct": "فشل في تحديث المنتج.",
+  "FailedToDeleteProduct": "فشل في حذف المنتج.",
+  "CategoryIdRequired": "معرف الفئة مطلوب.",
+
+
 
 }
 

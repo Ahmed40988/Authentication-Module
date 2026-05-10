@@ -80,7 +80,19 @@
   "SubCategoryNameRequired": "Subcategory name is required.",
   "SubSubCategoryAlreadyExists": "Sub-subcategory already exists.",
   "SubSubCategoryNotFound": "Sub-subcategory not found.",
-  "SubSubCategoryNameRequired": "Sub-subcategory name is required."
+  "SubSubCategoryNameRequired": "Sub-subcategory name is required.",
 
+
+  "ProductAlreadyExists": "Product already exists.",
+  "ProductNotFound": "Product not found.",
+  "ProductNameRequired": "Product name is required.",
+  "SkuAlreadyExists": "SKU already exists.",
+  "SkuRequired": "SKU is required.",
+  "InvalidPrice": "Price must be greater than or equal to 0.",
+  "InvalidStockQuantity": "Stock quantity must be greater than or equal to 0.",
+  "FailedToCreateProduct": "Failed to create product.",
+  "FailedToUpdateProduct": "Failed to update product.",
+  "FailedToDeleteProduct": "Failed to delete product.",
+  "CategoryIdRequired": "Category ID is required.",
 
 }

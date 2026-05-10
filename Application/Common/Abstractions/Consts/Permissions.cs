@@ -41,6 +41,14 @@ namespace Application.Common.Abstractions.Consts
         public const string SubSubCategoriesUpdate = "SubSubCategories.Update";
         public const string SubSubCategoriesDelete = "SubSubCategories.Delete";
 
+        public const string ProductsRead = "Products.Read";
+        public const string ProductsCreate = "Products.Create";
+        public const string ProductsUpdate = "Products.Update";
+        public const string ProductsDelete = "Products.Delete";
+   
+
+
+
 
     }
 }
