@@ -1,4 +1,6 @@
-﻿namespace Domain.Entities.SubSubCategories
+﻿using Domain.Entities.SubCategories;
+
+namespace Domain.Entities.SubSubCategories
 {
 
     public class SubSubCategory : BaseEntity

@@ -1,6 +1,7 @@
 ﻿using Domain.Common.ValueObjects;
 using Domain.Entities.Cataloges;
 using Domain.Entities.Categories;
+using Domain.Entities.SubCategories;
 using Domain.Entities.SubSubCategories;
 
 namespace Domain.Entities.Products

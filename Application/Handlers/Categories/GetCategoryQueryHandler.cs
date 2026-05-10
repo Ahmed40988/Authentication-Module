@@ -1,6 +1,4 @@
-﻿using Application.DTO.Localizes;
-using Domain.Entities.Categories;
-using global::Application.DTO.Categories;
+﻿using Domain.Entities.Categories;
 using global::Application.Queries.Categories;
 namespace Application.Handlers.Categories
 {

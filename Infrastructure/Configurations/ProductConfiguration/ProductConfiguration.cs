@@ -1,6 +1,7 @@
 ﻿using Domain.Entities.Cataloges;
 using Domain.Entities.Categories;
 using Domain.Entities.Products;
+using Domain.Entities.SubCategories;
 using Domain.Entities.SubSubCategories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

@@ -1,6 +1,6 @@
-﻿using Domain.Entities.Categories;
-using Domain.Entities.SubSubCategories;
-using global::Application.DTO.Categories;
+﻿using Application.Commands.Categories;
+using Domain.Entities.Categories;
+using Domain.Entities.SubCategories;
 
 namespace Application.Handlers.Categories
 {

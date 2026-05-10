@@ -28,7 +28,11 @@ namespace Application.Common.Abstractions.Consts
         public const string CategoriesCreate = "categories.create";
         public const string CategoriesUpdate = "categories.update";
         public const string CategoriesDelete = "categories.delete";
+        public const string SubCategoriesRead = "subcategories.read";
+        public const string SubCategoriesCreate = "subcategories.create";
+        public const string SubCategoriesUpdate = "subcategories.update";
+        public const string SubCategoriesDelete = "subcategories.delete";
 
-       
+
     }
 }

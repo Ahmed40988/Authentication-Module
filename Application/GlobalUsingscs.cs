@@ -10,3 +10,6 @@ global using Microsoft.EntityFrameworkCore;
 global using System.Security.Claims;
 global using Applicationtions.Consts;
 global using Microsoft.Extensions.Localization;
+global using Application.Common.Abstractions;
+global using Application.DTO.Categories;
+global using Application.DTO.Localizes;
