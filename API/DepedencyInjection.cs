@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text;
 
 namespace Api
@@ -90,7 +91,12 @@ namespace Api
                         Array.Empty<string>()
                     }
 
+
                 });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+
                 options.OperationFilter<AcceptLanguageHeaderOperationFilter>();
 
                 options.CustomSchemaIds(type => type.FullName);

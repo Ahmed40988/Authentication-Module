@@ -9,6 +9,7 @@ using Domain.Entities.Departments;
 using Domain.Entities.Employees;
 using Domain.Entities.Products;
 using Domain.Entities.RoleModule;
+using Domain.Entities.SubCategories;
 using Domain.Entities.SubSubCategories;
 using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Http;

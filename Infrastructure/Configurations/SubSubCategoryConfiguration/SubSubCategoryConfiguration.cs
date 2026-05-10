@@ -1,4 +1,5 @@
-﻿using Domain.Entities.SubSubCategories;
+﻿using Domain.Entities.SubCategories;
+using Domain.Entities.SubSubCategories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ServiceStack;

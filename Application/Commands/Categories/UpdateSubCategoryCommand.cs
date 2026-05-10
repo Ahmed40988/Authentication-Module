@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 
 namespace Application.Commands.Categories
 {
-        public record UpdateCategoryCommand(
-            Guid Id,
-            CategoryUpdateRequestDTo? Dto
-        ) : IRequest<Result<bool>>;
-    }
+    public record UpdateSubCategoryCommand(Guid Id,
+            SubCategoryUpdateRequestDto ?Dto) :IRequest<Result<bool>>;  
+}

@@ -1,5 +1,6 @@
 ﻿
 using Domain.Entities.BrandCategories;
+using Domain.Entities.SubCategories;
 using Domain.Entities.SubSubCategories;
 
 namespace Domain.Entities.Categories
@@ -8,7 +9,6 @@ namespace Domain.Entities.Categories
     public class Category : BaseEntity
     {
         public Guid Id { get; private set; }
-
         public LocalizedString Name { get; private set; } = default!;
         public LocalizedString ?Description { get; private set; } = default!;
         private readonly List<SubCategory> _subCategories = new();
@@ -17,7 +17,6 @@ namespace Domain.Entities.Categories
         private readonly List<BrandCategory> _brandCategories = new();
         public IReadOnlyCollection<BrandCategory> BrandCategories => _brandCategories.AsReadOnly();
         private Category() { }
-
         public Category(string? nameEn, string? nameAr, string? descEn, string? descAr)
         {
             Id = Guid.NewGuid();
@@ -31,12 +30,10 @@ namespace Domain.Entities.Categories
 
             return Result<bool>.Success(true);
         }
-
         public Result<bool> Delete()
         {
             if (_subCategories.Any())
                 return Result<bool>.Failure(LocalizationKeys.CannotDelete);
-
             Deactivate();
             return Result<bool>.Success(true);
         }
