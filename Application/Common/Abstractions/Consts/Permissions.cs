@@ -19,6 +19,7 @@ namespace Application.Common.Abstractions.Consts
 
         public const string PermissionsRead = "permissions.read";
         public const string PermissionsAssign = "permissions.assign";
+
         public const string BrandsRead = "brands.read";
         public const string BrandsCreate = "brands.create";
         public const string BrandsUpdate = "brands.update";
@@ -28,10 +29,17 @@ namespace Application.Common.Abstractions.Consts
         public const string CategoriesCreate = "categories.create";
         public const string CategoriesUpdate = "categories.update";
         public const string CategoriesDelete = "categories.delete";
+
         public const string SubCategoriesRead = "subcategories.read";
         public const string SubCategoriesCreate = "subcategories.create";
         public const string SubCategoriesUpdate = "subcategories.update";
         public const string SubCategoriesDelete = "subcategories.delete";
+
+
+        public const string SubSubCategoriesRead = "SubSubCategories.Read";
+        public const string SubSubCategoriesCreate = "SubSubCategories.Create";
+        public const string SubSubCategoriesUpdate = "SubSubCategories.Update";
+        public const string SubSubCategoriesDelete = "SubSubCategories.Delete";
 
 
     }

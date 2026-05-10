@@ -1,4 +1,5 @@
-﻿using Domain.Entities.SubCategories;
+﻿using Domain.Entities.Categories;
+using Domain.Entities.SubCategories;
 
 namespace Domain.Entities.SubSubCategories
 {
@@ -22,6 +23,22 @@ namespace Domain.Entities.SubSubCategories
             SetDescription(desEn, desAr);
         }
 
+        public Result<bool> Update(string? nameEn, string? nameAr, string? descEn, string? descAr, Guid? subCategoryId)
+        {
+            Name = LocalizedString.Create(nameEn, nameAr);
+            SetDescription(descEn, descAr);
+            if (subCategoryId.HasValue)
+                SubCategoryId = subCategoryId.Value;
+
+            return Result<bool>.Success(true);
+        }
+        public void ToggleStatus()
+        {
+            if (IsActive)
+                Deactivate();
+            else
+                Activate();
+        }
         public Result<bool> Delete()
         {
             Deactivate();
