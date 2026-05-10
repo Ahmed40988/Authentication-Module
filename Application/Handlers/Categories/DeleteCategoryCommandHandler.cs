@@ -1,5 +1,6 @@
 ﻿using Application.Commands.Categories;
 using Domain.Entities.Categories;
+using Domain.Entities.Products;
 using Domain.Entities.SubCategories;
 
 namespace Application.Handlers.Categories
@@ -8,12 +9,14 @@ namespace Application.Handlers.Categories
         public class DeleteCategoryCommandHandler(
             IGenericRepositories<Category> repo,
             IGenericRepositories<SubCategory> subCategoryRepo,
+            IGenericRepositories<Product> ProductRepo,
             IStringLocalizer localizer
         ) : IRequestHandler<DeleteCategoryCommand, Result<bool>>
         {
             private readonly IGenericRepositories<Category> repo = repo;
             private readonly IGenericRepositories<SubCategory> subCategoryRepo = subCategoryRepo;
-            private readonly IStringLocalizer localizer = localizer;
+        private readonly IGenericRepositories<Product> productRepo = ProductRepo;
+        private readonly IStringLocalizer localizer = localizer;
 
             public async Task<Result<bool>> Handle(
                 DeleteCategoryCommand request,
@@ -34,11 +37,9 @@ namespace Application.Handlers.Categories
                         );
                     }
 
-                    var hasSubCategories = await subCategoryRepo.AnyAsync(
-                        x => x.CategoryId == request.Id
-                    );
-
-                    if (hasSubCategories)
+                    var hasSubCategories = await subCategoryRepo.AnyAsync( x => x.CategoryId == request.Id);
+                var hasProducts = await productRepo.AnyAsync(x => x.CategoryId == request.Id);
+                if (hasSubCategories||hasProducts)
                     {
                         return Result<bool>.Failure(
                             localizer["CannotDeleteLinkedEntity"],

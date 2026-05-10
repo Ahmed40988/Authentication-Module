@@ -77,6 +77,10 @@
   "FailedToDeleteCategory": "Failed to delete category. Please try again later.",
   "SubCategoryAlreadyExists": "Subcategory already exists.",
   "SubCategoryNotFound": "Subcategory not found.",
-  "SubCategoryNameRequired" : "Subcategory name is required."
+  "SubCategoryNameRequired": "Subcategory name is required.",
+  "SubSubCategoryAlreadyExists": "Sub-subcategory already exists.",
+  "SubSubCategoryNotFound": "Sub-subcategory not found.",
+  "SubSubCategoryNameRequired": "Sub-subcategory name is required."
+
 
 }

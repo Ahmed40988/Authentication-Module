@@ -16,12 +16,12 @@ public class SubSubCategoryConfiguration : IEntityTypeConfiguration<SubSubCatego
 
         builder.Property(x => x.SubCategoryId).IsRequired();
 
-        builder.HasOne<SubCategory>()
-            .WithMany()
+            builder.HasOne(x => x.SubCategory)
+            .WithMany(x => x.SubSubCategories)
             .HasForeignKey(x => x.SubCategoryId)
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.OwnsOne(x => x.Name, b =>
+            builder.OwnsOne(x => x.Name, b =>
         {
             b.Property(p => p.En).HasColumnName("NameEn").HasMaxLength(200).IsRequired();
             b.Property(p => p.Ar).HasColumnName("NameAr").HasMaxLength(200).IsRequired();

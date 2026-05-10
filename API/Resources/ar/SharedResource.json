@@ -98,7 +98,10 @@
   "FailedToDeleteCategory": "فشل حذف الفئة. تأكد من عدم ارتباطها ببيانات أخرى.",
   "SubCategoryAlreadyExists": "الفئة الفرعية موجودة بالفعل.",
   "SubCategoryNotFound": "الفئة الفرعية غير موجودة.",
-  "SubCategoryNameRequired"  : "اسم الفئة الفرعية مطلوب."
+  "SubCategoryNameRequired": "اسم الفئة الفرعية مطلوب.",
+  "SubSubCategoryAlreadyExists": "الفئة الفرعية الثانية موجودة بالفعل.",
+  "SubSubCategoryNotFound": "الفئة الفرعية الثانية غير موجودة.",
+  "SubSubCategoryNameRequired": "اسم الفئة الفرعية الثانية مطلوب."
 
 }
 
