@@ -1,6 +1,3 @@
-
-using Application.DTO.Localizes;
-
 namespace Application.DTO.Products;
 
 public record ProductRequestDto(

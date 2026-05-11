@@ -9,7 +9,9 @@ namespace Application.DTO.Brands
                 LocalizedDto? Description,
                 string? LogoUrl,
                 bool IsActive,
-                List<ProductResponseDto>? Products
+                List<Guid>? categoryIds,
+                List<Guid >? productIds
+
             );
 
 }

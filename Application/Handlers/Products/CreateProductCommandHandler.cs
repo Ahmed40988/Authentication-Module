@@ -40,15 +40,23 @@ public class CreateProductCommandHandler(
             if (dto.Description is not null)
                 (descAr, descEn) = NormalizeHelper.Normalize(dto.Description.AR,  dto.Description.EN);
 
+            var brand = await brandRepo.Query()
+                    .Include(x => x.BrandCategories)
+                    .FirstOrDefaultAsync(x => x.Id == dto.BrandId, cancellationToken);
+
+            if (brand is null)
+                return Result<Guid>.Failure(localizer["BrandNotFound"], 404);
+
+            var categoryExists = await categoryRepo.AnyAsync(x => x.Id == dto.CategoryId);
+
+            if (!categoryExists)
+                return Result<Guid>.Failure(localizer["CategoryNotFound"], 404);
+
+            if (!brand.BrandCategories.Any(x => x.CategoryId == dto.CategoryId))
+                return Result<Guid>.Failure(localizer["CategoryDoesNotBelongToBrand"], 400);
 
             if (await repo.AnyAsync(x => x.SKU == dto.SKU))
                 return Result<Guid>.Failure(localizer["SkuAlreadyExists"], 400);
-
-            if (!await brandRepo.AnyAsync(x => x.Id == dto.BrandId))
-                return Result<Guid>.Failure(localizer["BrandNotFound"], 404);
-
-            if (!await categoryRepo.AnyAsync(x => x.Id == dto.CategoryId))
-                return Result<Guid>.Failure(localizer["CategoryNotFound"], 404);
 
             if (dto.SubCategoryId.HasValue &&
                 !await subCategoryRepo.AnyAsync(x => x.Id == dto.SubCategoryId.Value))

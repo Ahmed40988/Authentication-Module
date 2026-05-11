@@ -22,6 +22,7 @@ namespace Application.Handlers.Brands
         {
             var brand = await repo.Query()
                 .Include(x => x.Products)
+                .Include(x=>x.BrandCategories)
                     .ThenInclude(x => x.Category)
                     .ThenInclude(x => x.SubCategories)
                     .ThenInclude(x=>x.SubSubCategories)
@@ -38,35 +39,15 @@ namespace Application.Handlers.Brands
                 );
             }
 
-            var productsDto = brand.Products
-                       .Select(product => new ProductResponseDto
-                (
-                    product.Id,
+            var productIds = brand.Products
+      .Select(x => x.Id)
+      .ToList();
 
-                    new LocalizedDto
-                    {
-                        EN = product.Name.En,
-                        AR = product.Name.Ar
-                    },
+            var categoryIds = brand.BrandCategories
+            .Select(x => x.CategoryId)
+            .ToList();
 
-                    product.Description != null
-                        ? new LocalizedDto
-                        {
-                            EN = product.Description.En,
-                            AR = product.Description.Ar
-                        }
-                        : null,
-                    product.SKU,
-                    product.Price,
-                    product.ImageUrl,
-                    product.StockQuantity,
-                    product.IsActive,
-                    product.BrandId,
-                    product.CategoryId,
-                    product.SubCategoryId,
-                    product.SubSubCategoryId
-                ))
-                .ToList();
+
 
             var dto = new BrandDetailsDto
             (
@@ -85,7 +66,8 @@ namespace Application.Handlers.Brands
                     : null,
                 brand.LogoUrl,
                 brand.IsActive,
-                productsDto
+                categoryIds,
+                productIds
             );
 
             return Result<BrandDetailsDto>.Success(

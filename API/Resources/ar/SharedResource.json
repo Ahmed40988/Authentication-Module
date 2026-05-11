@@ -115,7 +115,7 @@
   "FailedToUpdateProduct": "فشل في تحديث المنتج.",
   "FailedToDeleteProduct": "فشل في حذف المنتج.",
   "CategoryIdRequired": "معرف الفئة مطلوب.",
-
+  "CategoryDoesNotBelongToBrand": "الفئة المحددة لا تنتمي إلى هذه العلامة التجارية."
 
 
 }
