@@ -51,14 +51,18 @@ public async Task<Result<bool>> Handle(
                 x.Id != request.Id &&(x.Name.En == nameEn || x.Name.Ar == nameAr)  );
 
             if (exists)
-                return Result<bool>.Failure( localizer["ProductAlreadyExists"]);  
+                return Result<bool>.Failure( localizer["ProductAlreadyExists"]);
 
-            if (dto.BrandId.HasValue &&
-                !await brandRepo.AnyAsync(x => x.Id == dto.BrandId.Value))
-                return Result<bool>.Failure(
-                    localizer["BrandNotFound"],
-                    404
-                );
+            if (dto.BrandId.HasValue)
+            {
+                var brand = await brandRepo.GetByGuidIdAsync(dto.BrandId.Value);
+
+                if (brand is null)
+                    return Result<bool>.Failure(localizer["BrandNotFound"], 404);
+
+                if (!brand.BrandCategories.Any(x => x.CategoryId == dto.CategoryId))
+                    return Result<bool>.Failure(localizer["CategoryDoesNotBelongToBrand"], 400);
+            }
 
             if (dto.CategoryId.HasValue &&
                 !await categoryRepo.AnyAsync(x => x.Id == dto.CategoryId.Value))
@@ -94,14 +98,14 @@ public async Task<Result<bool>> Handle(
             }
 
             product.Update(
-                nameEn,
-                nameAr,
-                dto.Price,
-                dto.StockQuantity,
-                imagePath,
-                descEn,
-                descAr
-            );
+             nameEn,
+             nameAr,
+             dto.Price ?? product.Price,
+             dto.StockQuantity ??product.StockQuantity,
+             imagePath,
+             descEn,
+             descAr
+         );
 
             await repo.UpdateAsync(product, cancellationToken);
             return Result<bool>.Success(true,localizer["Operationcompletedsuccessfully"]);

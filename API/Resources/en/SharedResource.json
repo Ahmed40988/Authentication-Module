@@ -94,5 +94,6 @@
   "FailedToUpdateProduct": "Failed to update product.",
   "FailedToDeleteProduct": "Failed to delete product.",
   "CategoryIdRequired": "Category ID is required.",
+  "CategoryDoesNotBelongToBrand": "The selected category does not belong to this brand."
 
 }
