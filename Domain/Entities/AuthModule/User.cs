@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.Base;
+using Domain.Entities.Employees;
 using Domain.Entities.RoleModule;
 using Microsoft.AspNetCore.Identity;
 
@@ -13,6 +14,6 @@ namespace Domain.Entities.AuthModules
         public string? CreatedById { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public string? UpdatedById { get; set; }
-
+        public Employee ?Employee { get; set; } = default!;
     }
 }

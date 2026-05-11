@@ -76,7 +76,7 @@ public class Department : BaseEntity
         return Result<bool>.Success(true);
     }
 
-    public Result<bool> RemoveEmployee(Guid employeeId)
+    public Result<bool> RemoveEmployee(string employeeId)
     {
         var employee = _employees.FirstOrDefault(e => e.Id == employeeId);
 

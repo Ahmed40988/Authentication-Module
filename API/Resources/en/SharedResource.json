@@ -81,8 +81,6 @@
   "SubSubCategoryAlreadyExists": "Sub-subcategory already exists.",
   "SubSubCategoryNotFound": "Sub-subcategory not found.",
   "SubSubCategoryNameRequired": "Sub-subcategory name is required.",
-
-
   "ProductAlreadyExists": "Product already exists.",
   "ProductNotFound": "Product not found.",
   "ProductNameRequired": "Product name is required.",
@@ -94,6 +92,21 @@
   "FailedToUpdateProduct": "Failed to update product.",
   "FailedToDeleteProduct": "Failed to delete product.",
   "CategoryIdRequired": "Category ID is required.",
-  "CategoryDoesNotBelongToBrand": "The selected category does not belong to this brand."
-
+  "CategoryDoesNotBelongToBrand": "The selected category does not belong to this brand.",
+  "FailedToDeleteEmployee": "Failed to delete employee. Please ensure the employee is not linked to other data.",
+  "EmployeeNotFound": "Employee not found.",
+  "FailedToCreateEmployee": "Failed to create employee.",
+  "FailedToUpdateEmployee": "Failed to update employee.",
+  "EmployeeNameRequired": "Employee name is required.",
+  "EmployeeEmailRequired": "Employee email is required.",
+  "EmployeeEmailInvalid": "Employee email is invalid.",
+  "EmployeePhoneRequired": "Employee phone number is required.",
+  "EmployeePhoneInvalid": "Employee phone number is invalid.",
+  "EmployeeStatusInvalid": "Invalid employee status.",
+  "FailedToAssignEmployee": "Failed to assign employee to department. Please ensure both employee and department exist.",
+  "EmployeeAlreadyExists": "Employee already exists.",
+    "PhoneNumberRequired": "Phone number is required",
+    "JobTitleRequired": "Job title is required",
+    "DepartmentRequired": "Department is required"
+  
 }
