@@ -19,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Persistence
 {
+
     public class ApplicationDbContext : IdentityDbContext<User>, IApplicationDbContext
     {
         private readonly IHttpContextAccessor _httpContext;

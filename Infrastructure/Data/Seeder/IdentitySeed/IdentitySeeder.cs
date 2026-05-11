@@ -22,6 +22,7 @@ namespace Infrastructure.Data.Seeder.IdentitySeed
             await PermissionSeed.SeedAsync(context);
             await RolePermissionSeed.SeedAsync(context, roleManager);
             await UserSeed.SeedAsync(userManager);
+            await DepartmentSeed.SeedAsync(context);
         }
     }
 }

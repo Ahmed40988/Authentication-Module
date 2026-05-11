@@ -115,8 +115,21 @@
   "FailedToUpdateProduct": "فشل في تحديث المنتج.",
   "FailedToDeleteProduct": "فشل في حذف المنتج.",
   "CategoryIdRequired": "معرف الفئة مطلوب.",
-  "CategoryDoesNotBelongToBrand": "الفئة المحددة لا تنتمي إلى هذه العلامة التجارية."
-
-
+  "CategoryDoesNotBelongToBrand": "الفئة المحددة لا تنتمي إلى هذه العلامة التجارية.",
+  "FailedToDeleteEmployee": "فشل في حذف الموظف. تأكد من عدم ارتباطه ببيانات أخرى.",
+  "EmployeeNotFound": "الموظف غير موجود.",
+  "FailedToCreateEmployee": "فشل في إنشاء الموظف.",
+  "FailedToUpdateEmployee": "فشل في تحديث الموظف.",
+  "EmployeeNameRequired": "اسم الموظف مطلوب.",
+  "EmployeeEmailRequired": "البريد الإلكتروني للموظف مطلوب.",
+  "EmployeeEmailInvalid": "البريد الإلكتروني للموظف غير صحيح.",
+  "EmployeePhoneRequired": "رقم هاتف الموظف مطلوب.",
+  "EmployeePhoneInvalid": "رقم هاتف الموظف غير صحيح.",
+  "EmployeeStatusInvalid": "حالة الموظف غير صالحة.",
+  "FailedToAssignEmployee": "فشل في تعيين الموظف إلى القسم. تأكد من أن الموظف والقسم موجودان.",
+  "EmployeeAlreadyExists": "الموظف موجود بالفعل.",
+    "PhoneNumberRequired": "رقم الهاتف مطلوب",
+    "JobTitleRequired": "المسمى الوظيفي مطلوب",
+    "DepartmentRequired": "القسم مطلوب",
 }
 

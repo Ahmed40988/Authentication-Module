@@ -45,9 +45,13 @@ namespace Application.Common.Abstractions.Consts
         public const string ProductsCreate = "Products.Create";
         public const string ProductsUpdate = "Products.Update";
         public const string ProductsDelete = "Products.Delete";
-   
 
 
+        public const string EmployeeView = "Employees.View";
+        public const string EmployeeCreate = "Employees.Create";
+        public const string EmployeeUpdate = "Employees.Update";
+        public const string EmployeeDelete = "Employees.Delete";
+        public const string EmployeeAssign = "Employees.Assign";
 
 
     }

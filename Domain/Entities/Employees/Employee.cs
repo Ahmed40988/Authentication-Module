@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Departments;
+﻿using Domain.Entities.AuthModules;
+using Domain.Entities.Departments;
 using Domain.Enums;
 
 namespace Domain.Entities.Employees
@@ -6,27 +7,26 @@ namespace Domain.Entities.Employees
  
     public class Employee : BaseEntity
     {
-        public Guid Id { get; private set; }
-        public LocalizedString FullName { get; private set; } = default!;
-        public string Email { get; private set; } = string.Empty;
-        public string Phone { get; private set; } = string.Empty;
+        public string Id { get; private set; }
         public string JobTitle { get; private set; } = string.Empty;
         public EmployeeStatus Status { get; private set; } 
         public DateTime HireDate { get; private set; } = DateTime.UtcNow;
         public Guid DepartmentId { get; private set; }
         public Department Department { get; private set; } = default!;
+        public User User { get; private set; } = default!;
 
         private Employee() { }
 
-        public Employee(string? nameEn, string? nameAr, string email,string phone ,string jobTitle,Guid departmentId, DateTime?hireDate=null)
+        public Employee(
+            string userId,
+            string jobTitle,
+            Guid departmentId,
+            DateTime? hireDate = null)
         {
-            Id = Guid.NewGuid();
-            FullName = LocalizedString.Create(nameEn, nameAr);
-            SetEmail(email);
-            SetPhone(phone);
+            Id = userId;
             SetJobTitle(jobTitle);
-            SetHireDate(hireDate);
             SetDepartment(departmentId);
+            SetHireDate(hireDate);
             Status = EmployeeStatus.Active;
         }
 
@@ -36,27 +36,12 @@ namespace Domain.Entities.Employees
             return Result<bool>.Success(true);
         }
 
-        private void SetEmail(string email)
-        {
-            if (string.IsNullOrWhiteSpace(email))
-                throw new ArgumentException(LocalizationKeys.Required);
-
-            Email = email.Trim();
-        }
-
         private void SetJobTitle(string jobTitle)
         {
             if (string.IsNullOrWhiteSpace(jobTitle))
                 throw new ArgumentException(LocalizationKeys.Required);
 
             JobTitle = jobTitle.Trim();
-        }
-        private void SetPhone(string Phone)
-        {
-            if (string.IsNullOrWhiteSpace(Phone))
-                throw new ArgumentException(LocalizationKeys.Required);
-
-            Phone = Phone.Trim();
         }
         private void SetHireDate(DateTime? hireDate)
         {
@@ -73,6 +58,18 @@ namespace Domain.Entities.Employees
                 throw new ArgumentException(LocalizationKeys.Invalid);
 
             DepartmentId = departmentId;
+        }
+        public Result<bool> Update(
+    string jobTitle,
+    Guid departmentId,
+    EmployeeStatus status)
+        {
+            SetJobTitle(jobTitle);
+            SetDepartment(departmentId);
+
+            Status = status;
+
+            return Result<bool>.Success(true);
         }
         public Result<bool> UpdateHireDate(DateTime hireDate)
         {
